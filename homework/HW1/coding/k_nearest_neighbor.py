@@ -76,7 +76,9 @@ class KNearestNeighbor(object):
                 #####################################################################
                 # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-                pass
+                # pass
+                dis = np.sqrt(np.sum(np.square(X[i] - self.X_train[j])))
+                dists[i, j] = dis
 
                 # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
@@ -100,7 +102,9 @@ class KNearestNeighbor(object):
             #######################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            # pass
+
+            dists[i, :] = np.sqrt(np.sum(np.square(X[i] - self.X_train), axis=1))
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
@@ -130,8 +134,31 @@ class KNearestNeighbor(object):
         #########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        pass
+        # pass
 
+        # compute the distances between all test examples and all train examples
+        # print(X.shape, self.X_train.shape)
+
+        # dists^2[i][j] = || (ai - bj) ||^2 = || ai ||^2 + || bj ||^2 - 2 * ai * bj
+
+        X_norm_2 = np.sum(X ** 2, axis=1).reshape(num_test, 1)
+        X_train_norm_2 = np.sum(self.X_train ** 2, axis=1).reshape(1, num_train)
+        X_Xtrain = np.dot(X, self.X_train.T)
+        # broadcast: different shape but same dimension addition/multiplication
+        # X_norm_2 : (500, 1)
+        # X_train_norm_2 : (1, 5000)
+        # X_norm_2 + X_train_norm_2 : (500, 5000)
+        # X_norm_2 copy and paste -> (500, 5000)
+        # X_train_norm_2 copy and paste -> (500, 5000)
+
+        # dists = X_norm_2.reshape(-1, 1) + X_train_norm_2 - 2 * X_Xtrain
+
+        # print(X_norm_2 + X_train_norm_2)
+        # print((X_norm_2 + X_train_norm_2).shape)
+        # print(X_norm_2.shape, X_train_norm_2.shape)   
+
+        dists = X_norm_2 + X_train_norm_2 - 2 * X_Xtrain
+        dists = np.sqrt(dists)
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 
@@ -163,7 +190,12 @@ class KNearestNeighbor(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            # pass
+
+            sorted_dis = np.argsort(dists[i])
+            closest_y = self.y_train[sorted_dis[:k]]
+            # print(sorted_dis)
+            # print(len(closest_y))
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
             #########################################################################
@@ -175,7 +207,31 @@ class KNearestNeighbor(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            # pass
+
+            # find the most common label in the list closest_y of labels
+            # tie to the closest label
+
+            # count the number of each label
+            label_count = {}
+            for label in closest_y:
+                if label in label_count:
+                    label_count[label] += 1
+                else:
+                    label_count[label] = 1
+            
+            # sort the dictionary by value, if the value are the same, then sory by key
+            sorted_label_count = sorted(label_count.items(), key=lambda x: x[1], reverse=True)
+
+            #  Break ties by choosing the smaller label.                        
+            most_common_label = sorted_label_count[0][0]
+            for label, count in sorted_label_count:
+                if count == sorted_label_count[0][1] and label < most_common_label:
+                    most_common_label = label
+
+            # print(sorted_label_count)
+            # print(most_common_label)
+            y_pred[i] = most_common_label
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
