@@ -51,43 +51,53 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 	      \end{itemize}
 
 (a) $\mathbf{\Sigma}=E[(\mathbf{X}-\mu)(\mathbf{X}-\mu)^T]$\\
-So $\forall y\in\mathbb{R}^n$,\\
-$y^T\mathbf{\Sigma} y=E[y^T(\mathbf{X}-\mu)(\mathbf{X}-\mu)^Ty]=E[((\mathbf{X}-\mu)^Ty)^T((\mathbf{X}-\mu)^Ty)]=E(\|(\mathbf{X}-\mu)^Ty\|_2^2)$.\\
-since $\|(\mathbf{X}-\mu)^Ty\|_2^2\geq0$, so $E(\|(\mathbf{X}-\mu)^Ty\|_2^2)\geq0$\\
-so $\forall y\in\mathbb{R}^n,y^T\mathbf{\Sigma} y\geq 0$\\
+Suppose that the dimension of $\mathbf{X}$ is $p$.\\
+So $\forall \mathbf{y}\in\mathbb{R}^p$,\\
+$\mathbf{y}^T\mathbf{\Sigma}\mathbf{y}=\mathbf{y}^TE[(\mathbf{X}-\mu)(\mathbf{X}-\mu)^T]\mathbf{y}=E[\mathbf{y}^T(\mathbf{X}-\mu)(\mathbf{X}-\mu)^Ty]$\\
+$=E[((\mathbf{X}-\mu)^T\mathbf{y})^T((\mathbf{X}-\mu)^T\mathbf{y})]=E(\|(\mathbf{X}-\mu)^T\mathbf{y}\|_2^2)$.\\
+since $\|(\mathbf{X}-\mu)^T\mathbf{y}\|_2^2\geq0$, so $E(\|(\mathbf{X}-\mu)^T\mathbf{y}\|_2^2)\geq0$\\
+so $\forall \mathbf{y}\in\mathbb{R}^p,\mathbf{y}^T\mathbf{\Sigma} \mathbf{y}\geq 0$\\
 So $\mathbf{\Sigma}$ is a semi positive definite matrix.\\
+So above all, the covariance of $\mathbf{X}, \mathbf{\Sigma}$ is a semi positive definite matrix.\\
 
 (b) From what we have learned in class, the PDF of the multivariate normal distribution
-$\mathbf{X}_i\sim N(\mu, \mathbf{\Sigma})$ is that $Pr(\mathbf{X}_i;\mu,\mathbf{\Sigma})=\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}}exp(-\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu))$
-, suppose that the dimension of $\mathbf{X}$ is $p$.\\
+$\mathbf{X}_i\sim \mathcal{N}(\mu, \mathbf{\Sigma})$ is that $Pr(\mathbf{X}_i;\mu,\mathbf{\Sigma})=\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}}exp(-\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}^{-1}(\mathbf{X}_i-\mu))$
+, suppose that the dimension of $\mathbf{X}_i$ is $p$.\\
 Since the sampling are independent, so the likelihood function is:\\
 $Pr(\mathbf{X}_1,\cdots,\mathbf{X}_n;\mu,\mathbf{\Sigma})=\prod\limits_{i=1}^nPr(\mathbf{X}_i;\mu,\mathbf{\Sigma})$\\
 Then the log-likelihood function is:\\
-$l(\mu,\mathbf{\Sigma})=\sum\limits_{i=1}^n\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}}exp(-\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)))$\\
-$=n\cdot\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}})-\sum\limits_{i=1}^n\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)$\\
+$l(\mu,\mathbf{\Sigma})=\sum\limits_{i=1}^n\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}}exp(-\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}^{-1}(\mathbf{X}_i-\mu)))$\\
+$=n\cdot\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}})-\sum\limits_{i=1}^n\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}^{-1}(\mathbf{X}_i-\mu)$\\
 
 And the MLE of $\mu$ is:\\
 $\hat{\mu}=\argmax\limits_{\mu}Pr(\mathbf{X}_1,\cdots,\mathbf{X}_n;\mu,\mathbf{\Sigma})=\argmax\limits_{\mu}l(\mu,\mathbf{\Sigma})$\\
 Since $l(\mu,\mathbf{\Sigma})$ is a concave function, so we can get the optimal solution by setting the derivative of $l(\mu,\mathbf{\Sigma})$ to 0.\\
-$\frac{\partial l(\mu,\mathbf{\Sigma})}{\partial \mu}=\frac{\partial b\cdot\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}})}{\partial \mu}-\frac{\partial \sum\limits_{i=1}^n\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)}{\partial \mu}$\\
-$=\sum\limits_{i=1}^n-\frac{\partial \dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)}{\partial \mu}$\\
+$\frac{\partial l(\mu,\mathbf{\Sigma})}{\partial \mu}=\frac{\partial n\cdot\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}})}{\partial \mu}-\frac{\partial \sum\limits_{i=1}^n\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}^{-1}(\mathbf{X}_i-\mu)}{\partial \mu}$\\
+$=\sum\limits_{i=1}^n-\frac{\partial \dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}^{-1}(\mathbf{X}_i-\mu)}{\partial \mu}$\\
 
 Since $\mathbf{\Sigma}$ is the covariance matrix, so $\mathbf{\Sigma}$ is a symmetric matrix, i.e.$\mathbf{\Sigma}=\mathbf{\Sigma}^T$.\\
 So $(\mathbf{\Sigma}^{-1})^T=(\mathbf{\Sigma}^T)^{-1}=\mathbf{\Sigma}^{-1}$.\\
 i.e. $\mathbf{\Sigma}$ is also a symmetric matrix.\\
 
-So $\frac{\partial l(\mu,\mathbf{\Sigma})}{\partial \mu}=\sum\limits_{i=1}^n-\frac{\partial \dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)}{\partial \mu}$\\
-$=\sum_{i=1}^n-\frac{\partial \dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)}{\partial (\mathbf{X}_i-\mu)}\frac{\partial (\mathbf{X}_i-\mu)}{\partial \mu}$\\
-$=\sum\limits_{i=1}^n-\dfrac{1}{2}(2\mathbf{\Sigma}(\mathbf{X}-\mu))(-1)$\\
-$=\sum\limits_{i=1}^n\mathbf{\Sigma}(\mathbf{X}_i-\mu)$\\
-$=\mathbf{\Sigma}(\sum\limits_{i=1}^n\mathbf{X}_i-n\mu)$\\
+So $\frac{\partial l(\mu,\mathbf{\Sigma})}{\partial \mu}=\sum\limits_{i=1}^n-\frac{\partial \dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}^{-1}(\mathbf{X}_i-\mu)}{\partial \mu}$\\
+$=\sum\limits_{i=1}^n-\frac{\partial \dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}^{-1}(\mathbf{X}_i-\mu)}{\partial (\mathbf{X}_i-\mu)}\frac{\partial (\mathbf{X}_i-\mu)}{\partial \mu}$\\
+$=\sum\limits_{i=1}^n-\dfrac{1}{2}(2\mathbf{\Sigma}^{-1}(\mathbf{X}-\mu))(-1)$\\
+$=\sum\limits_{i=1}^n\mathbf{\Sigma}^{-1}(\mathbf{X}_i-\mu)$\\
+$=\mathbf{\Sigma}^{-1}(\sum\limits_{i=1}^n\mathbf{X}_i-n\mu)$\\
 
-So $\frac{\partial l(\mu,\mathbf{\Sigma})}{\partial \mu}=0\Rightarrow \mathbf{\Sigma}(\sum\limits_{i=1}^n\mathbf{X}_i-n\mu)=0\Rightarrow\hat{\mu}=\dfrac{1}{n}\sum\limits_{i=1}^n\mathbf{X}_i$\\
+So $\frac{\partial l(\mu,\mathbf{\Sigma})}{\partial \mu}=0\Rightarrow \mathbf{\Sigma}^{-1}(\sum\limits_{i=1}^n\mathbf{X}_i-n\mu)=0\Rightarrow\hat{\mu}=\dfrac{1}{n}\sum\limits_{i=1}^n\mathbf{X}_i$\\
 
-So above all, the log-likelihood function is $l(\mu,\mathbf{\Sigma})=n\cdot\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}})-\sum\limits_{i=1}^n\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)$\\
+So above all, the log-likelihood function is $l(\mu,\mathbf{\Sigma})=n\cdot\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}})-\sum\limits_{i=1}^n\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}^{-1}(\mathbf{X}_i-\mu)$\\
 And the MLE of $\mu$ is $\hat{\mu}=\dfrac{1}{n}\sum\limits_{i=1}^n\mathbf{X}_i$\\
 
-(c)
+(c) Since $\hat{\theta}$ is the unbiased estimator of $\theta$, so $E(\hat{\theta})=\theta$.\\
+And from the defination of varaiance, we could get that $Var(\hat{\theta})=E[(\hat{\theta}-E(\hat{\theta}))^2]=E[(\hat{\theta})^2]-[E(\hat{\theta})]^2$.\\
+Since $Var(\hat{\theta})>0$, so $E[(\hat{\theta})^2]-[E(\hat{\theta})]^2>0$\\
+i.e. $E[(\hat{\theta})^2]>[E(\hat{\theta})]^2=(\hat{\theta})^2$\\
+So $E[(\hat{\theta})^2]\neq(\hat{\theta})^2$\\
+So $(\hat{\theta})^2$ is not an unbiased estimator of $\theta^2$.\\
+
+So above all, we have proved that if $\hat{\theta}$ is an unbiased estimator of $\theta$ and $Var(\hat{\theta})>0$, then $(\hat{\theta})^2$ is not an unbiased estimator of $\theta^2$.\\
 
 
 
@@ -114,24 +124,46 @@ And the MLE of $\mu$ is $\hat{\mu}=\dfrac{1}{n}\sum\limits_{i=1}^n\mathbf{X}_i$\
 	\end{itemize}
 
 
-(a) 
+(a) the MLE of $a$ and $b$ is:\\
+$\hat{a},\hat{b}=\argmax\limits_{a,b}L(a,b)=\argmax\limits_{a,b}\prod\limits_{i=1}^np(y_i|x_i,a,b)$
+$=\argmax\limits_{a,b}\prod\limits_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{1}{2\sigma^2}(y_i-ax_i-b)^2)$\\
 
-
+So above all, the MLE problem for estimating $a$ and $b$ is:\\
+$\hat{a},\hat{b}=\argmax\limits_{a,b}\prod\limits_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{1}{2\sigma^2}(y_i-ax_i-b)^2)$\\
 
 (b) 
+Take log to the likelihood function, we could get:\\
+$\hat{a},\hat{b}=\argmax\limits_{a,b}\sum\limits_{i=1}^n\log(p(y_i|x_i,a,b))=\argmax\limits_{a,b}\sum\limits_{i=1}^n\log(\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{1}{2\sigma^2}(y_i-ax_i-b)^2))$\\
+Since $\frac{1}{\sqrt{2\pi}\sigma}$ has nothing with $a,b$, and $\sigma$ is just the variance of the noise term, so $\frac{1}{\sqrt{2\pi}\sigma}, -\dfrac{1}{2\sigma^2}$ are just constants.\\
+so $\hat{a},\hat{b}=\argmax\limits_{a,b}\sum\limits_{i=1}^n-(y_i-ax_i-b)^2=\argmin\limits_{a,b}\sum\limits_{i=1}^n(y_i-ax_i-b)^2$\\
+Since $\sum\limits_{i=1}^n(y_i-ax_i-b)^2$ is a convex function both for $a$ and $b$, so we just need to set the derivative of $\sum\limits_{i=1}^n(y_i-ax_i-b)^2$ to 0 to get the optimal solution.\\
+Let $f(a,b)=\sum\limits_{i=1}^n(y_i-ax_i-b)^2,\bar{x}=\dfrac{1}{n}\sum\limits_{i=1}^nx_i,\bar{y}=\dfrac{1}{n}\sum\limits_{i=1}^ny_i$\\
 
+So $\frac{\partial f}{\partial b}=\sum\limits_{i=1}^n-2(y_i-ax_i-b)=2nb-2\sum\limits_{i=1}^n(y_i-ax_i)$\\
+$\dfrac{\partial f}{\partial b}=0 \Rightarrow 2nb=2\sum\limits_{i=1}^n(y_i-ax_i)\Rightarrow b=\dfrac{1}{n}\sum\limits_{i=1}^ny_i-\dfrac{1}{n}a\sum\limits_{i=1}^nx_i$\\
+$\Rightarrow b=\bar{y}-a\bar{x}$\\
 
+Similarly, $\frac{\partial f}{\partial a}=\sum\limits_{i=1}^n-2x_i(y_i-ax_i-b)=(-2)\sum\limits_{i=1}^nx_iy_i-(-2)\sum\limits_{i=1}^nax_i^2-(-2)\sum\limits_{i=1}^nbx_i$\\
+$\dfrac{\partial f}{\partial a}=0\Rightarrow \sum\limits_{i=1}^nx_iy_i-a\sum\limits_{i=1}^nx_i^2-b\sum\limits_{i=1}^nx_i=0$\\
+put $b=\bar{y}-a\bar{x}$ into the above equation, we could get:\\
+$\Rightarrow \sum\limits_{i=1}^nx_iy_i-a\sum\limits_{i=1}^nx_i^2-(\bar{y}-a\bar{x})\sum\limits_{i=1}^nx_i=0$\\
+$\Rightarrow a=\dfrac{\sum\limits_{i=1}^nx_iy_i-n\bar{x}\bar{y}}{\sum\limits_{i=1}^nx_i^2-n(\bar{x})^2}$\\
 
-(c)
+And put $a=\dfrac{\sum\limits_{i=1}^nx_iy_i-n\bar{x}\bar{y}}{\sum\limits_{i=1}^nx_i^2-n(\bar{x})^2}$ into $b=\bar{y}-a\bar{x}$, we could get:\\
+$b=\bar{y}-\dfrac{\sum\limits_{i=1}^nx_iy_i-n\bar{x}\bar{y}}{\sum\limits_{i=1}^nx_i^2-n(\bar{x})^2}\bar{x}=\dfrac{\sum\limits_{i=1}^nx_i^2\bar{y}-\sum\limits_{i=1}^nx_iy_i\bar{x}}{\sum\limits_{i=1}^nx_i^2-n(\bar{x})^2}$\\
 
+So above all, the optimal solution of $a$ and $b$ is:\\
+$a=\dfrac{\sum\limits_{i=1}^nx_iy_i-n\bar{x}\bar{y}}{\sum\limits_{i=1}^nx_i^2-n(\bar{x})^2}$\\
+$b=\bar{y}-a\bar{x}=\dfrac{\sum\limits_{i=1}^nx_i^2\bar{y}-\sum\limits_{i=1}^nx_iy_i\bar{x}}{\sum\limits_{i=1}^nx_i^2-n(\bar{x})^2}$\\
 
+(c) From the analysis in (b), we could get that:\\
+$\dfrac{\partial f}{\partial b}=2nb-2\sum\limits_{i=1}^n(y_i-ax_i)=0\Rightarrow b=\bar{y}-a\bar{x}$\\
+i.e. $b=\bar{y}-a\bar{x}$.\\
 
+Put $(\bar{x},\bar{y})$ into the linear model $f(X)=aX+b$, we could get:\\
+$f(\bar{x})=a\bar{x}+b=a\bar{x}+\bar{y}-a\bar{x}=\bar{y}$\\
 
-
-
-
-
-
+So above all, the learned linear model $f(X)=aX+b$ always passes through the point $(\bar{x},\bar{y})$.\\
 
 	      \newpage
 
@@ -160,16 +192,7 @@ And the MLE of $\mu$ is $\hat{\mu}=\dfrac{1}{n}\sum\limits_{i=1}^n\mathbf{X}_i$\
 			\end{table}
 	      \end{itemize}
       	  
-(a) Linear
-
-
-
-
-
-
-
-
-
+(a) Linear is to the for all parameters of the regression variable $\beta$.\\
 
 (b) As we have learned in linear algebra, we know that tha matrix
 $X^TX$ must be similiar and diagonalizable.\\
@@ -187,7 +210,6 @@ So $\Lambda+\lambda I$ is positive defined.\\
 Since $X^TX+\lambda I=P(\Lambda+\lambda I)P^{-1}$,
 from the knowledge of similarity and diagonalizable, we could know that $X^TX+\lambda I$ is also positive defined.\\
 So $X^TX+\lambda I$ is invertible.\\
-
 And let $f(\beta)=\|\mathbf{y}-\mathbf{X}\mathbf{\beta}\|_2^2 + \lambda\|\beta\|_2^2=(\mathbf{y}-\mathbf{X}\mathbf{\beta})^T(\mathbf{y}-\mathbf{X}\mathbf{\beta})+\lambda\beta^T\beta=\mathbf{y}^T\mathbf{y}-\beta^T\mathbf{X}^T\mathbf{y}-\mathbf{y}^T\mathbf{X}\beta+\beta^T\mathbf{X}^T\mathbf{X}\beta+\lambda\beta^T\beta$\\
 Since $f(\beta)$ is convex, so we just need to set the derivative of $f(\beta)$ to 0 to get the optimal solution.\\
 $\frac{\partial f(\beta)}{\partial \beta}=2(-\mathbf{X}^T\mathbf{y}+\mathbf{X}^T\mathbf{X}\beta+\lambda\beta)$\\
@@ -198,14 +220,26 @@ So $\beta *=(\mathbf{X}^T\mathbf{X}+\lambda I)^{-1}\mathbf{X}^T\mathbf{y}$\\
 
 So above all, the optimal solution $\beta *=(\mathbf{X}^T\mathbf{X}+\lambda I)^{-1}\mathbf{X}^T\mathbf{y}$.\\
 
-(c)     	  
+(c) Let the data be formed as $\mathbf{X}_i=(x_1,x_2)$.\\
+And let the hypothesis function be $f(\mathbf{X})=b_1x_1^2+b_2x_2^2+b_3$.\\
+Let $b_1=1,b_2=1,b_3=-25$, so the regression function is $f(\mathbf{X})=x_1^2+x_2^2-25$, and its a linear regression.\\
+Make the separate line be $f(\mathbf{X})=0$, so the separate line is $x_1^2+x_2^2-25=0$.\\
+If $f(\mathbf{X})\leq 0$, set the label to be $+1$, else set the label to be $-1$.\\
+And we could get the result as below:\\
 
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{c|cccccc}
+			Data $\mathbf{X}$ & (1,3) & (4,4) & (3,-6) & (-2,1) & (-3,5) & (-6,-4) \\ \hline
+			Function value $f(\mathbf{X})$ & -15 & 7 & 20 & -20 & 9 & 27\\
+			Label & +1 & -1 & -1 & +1 & -1 & -1
+		\end{tabular}
+		\label{tab:my_label}
+	\end{table}
 
-
-
-
-      	  
-      	  \newpage
+So above all, we could find that we can construct a linear hypothesis function to separate the given data set.\\
+	
+	\newpage
 
 
 \end{enumerate}
