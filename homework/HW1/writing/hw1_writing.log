@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  17 OCT 2023 22:01
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  25 OCT 2023 16:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -567,16 +567,71 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 
 LaTeX Warning: No \author given.
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--59
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--68
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--78
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--84
+
+ []
+
 [1
 
-] [2] [3] (./hw1_writing.aux) ) 
+]
+Underfull \hbox (badness 10000) in paragraph at lines 85--86
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--89
+
+ []
+
+[2] [3]
+Underfull \hbox (badness 10000) in paragraph at lines 176--184
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 185--189
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 190--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--194
+
+ []
+
+[4] (./hw1_writing.aux) ) 
 Here is how much of TeX's memory you used:
  16831 strings out of 476179
  330702 string characters out of 5813072
- 792116 words of memory out of 5000000
+ 808116 words of memory out of 5000000
  37240 multiletter control sequences out of 15000+600000
  483210 words of font info for 87 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 100i,8n,104p,418b,373s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 100i,8n,104p,418b,377s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on hw1_writing.pdf (3 pages).
+Output written on hw1_writing.pdf (4 pages).

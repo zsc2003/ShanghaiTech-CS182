@@ -43,19 +43,49 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 \begin{enumerate}[1.]
 
 
-	\item \defpoints{10} [Math review] Suppose $\{\mathbf{X}_1, \mathbf{X}_2, \cdots, \mathbf{X}_n\}$ form a random sample from a multivariate distribution:
+	\item \defpoints{10} [Math review] Suppose $\{\mathbf{X}_1, \mathbf{X}_2, \cdots, \mathbf{X}_n\}$ are random samples from a random variable $\mathbf{X}$:
 	      \begin{itemize}
-		      \item[(a)] Prove that the covariance of $\mathbf{X}_i$ is a semi positive definite matrix. ~\defpoints{3}
-		      \item[(b)] Assuming $\mathbf{X}_i\sim \mathcal{N}(\mathbf{\mu},\mathbf{\Sigma})$ which is a multivariate normal distribution, and samples $X_i$, derive the the log-likelihood $\mathit{l}(\mathbf{\mu},\mathbf{\Sigma})$ and MLE of $\mathbf{\mu}$ ~\defpoints{4}
+		      \item[(a)] Prove that the covariance of $\mathbf{X}$ is a semi positive definite matrix. ~\defpoints{3}
+		      \item[(b)] Assuming $\mathbf{X}\sim \mathcal{N}(\mathbf{\mu},\mathbf{\Sigma})$ which is a multivariate normal distribution, derive the the log-likelihood $\mathit{l}(\mathbf{\mu},\mathbf{\Sigma})$ and MLE of $\mathbf{\mu}$ ~\defpoints{4}
 		      \item[(c)] Suppose $\hat{\theta}$ is an unbiased estimator of $\theta$ and $\mathbf{Var}(\hat{\theta})>0$. Prove that $(\hat{\theta})^2$ is not an unbiased estimator of $\theta^2$. ~\defpoints{3}
 	      \end{itemize}
-		
-(a) 
 
+(a) $\mathbf{\Sigma}=E[(\mathbf{X}-\mu)(\mathbf{X}-\mu)^T]$\\
+So $\forall y\in\mathbb{R}^n$,\\
+$y^T\mathbf{\Sigma} y=E[y^T(\mathbf{X}-\mu)(\mathbf{X}-\mu)^Ty]=E[((\mathbf{X}-\mu)^Ty)^T((\mathbf{X}-\mu)^Ty)]=E(\|(\mathbf{X}-\mu)^Ty\|_2^2)$.\\
+since $\|(\mathbf{X}-\mu)^Ty\|_2^2\geq0$, so $E(\|(\mathbf{X}-\mu)^Ty\|_2^2)\geq0$\\
+so $\forall y\in\mathbb{R}^n,y^T\mathbf{\Sigma} y\geq 0$\\
+So $\mathbf{\Sigma}$ is a semi positive definite matrix.\\
 
-(b) 
+(b) From what we have learned in class, the PDF of the multivariate normal distribution
+$\mathbf{X}_i\sim N(\mu, \mathbf{\Sigma})$ is that $Pr(\mathbf{X}_i;\mu,\mathbf{\Sigma})=\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}}exp(-\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu))$
+, suppose that the dimension of $\mathbf{X}$ is $p$.\\
+Since the sampling are independent, so the likelihood function is:\\
+$Pr(\mathbf{X}_1,\cdots,\mathbf{X}_n;\mu,\mathbf{\Sigma})=\prod\limits_{i=1}^nPr(\mathbf{X}_i;\mu,\mathbf{\Sigma})$\\
+Then the log-likelihood function is:\\
+$l(\mu,\mathbf{\Sigma})=\sum\limits_{i=1}^n\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}}exp(-\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)))$\\
+$=n\cdot\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}})-\sum\limits_{i=1}^n\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)$\\
 
+And the MLE of $\mu$ is:\\
+$\hat{\mu}=\argmax\limits_{\mu}Pr(\mathbf{X}_1,\cdots,\mathbf{X}_n;\mu,\mathbf{\Sigma})=\argmax\limits_{\mu}l(\mu,\mathbf{\Sigma})$\\
+Since $l(\mu,\mathbf{\Sigma})$ is a concave function, so we can get the optimal solution by setting the derivative of $l(\mu,\mathbf{\Sigma})$ to 0.\\
+$\frac{\partial l(\mu,\mathbf{\Sigma})}{\partial \mu}=\frac{\partial b\cdot\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}})}{\partial \mu}-\frac{\partial \sum\limits_{i=1}^n\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)}{\partial \mu}$\\
+$=\sum\limits_{i=1}^n-\frac{\partial \dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)}{\partial \mu}$\\
 
+Since $\mathbf{\Sigma}$ is the covariance matrix, so $\mathbf{\Sigma}$ is a symmetric matrix, i.e.$\mathbf{\Sigma}=\mathbf{\Sigma}^T$.\\
+So $(\mathbf{\Sigma}^{-1})^T=(\mathbf{\Sigma}^T)^{-1}=\mathbf{\Sigma}^{-1}$.\\
+i.e. $\mathbf{\Sigma}$ is also a symmetric matrix.\\
+
+So $\frac{\partial l(\mu,\mathbf{\Sigma})}{\partial \mu}=\sum\limits_{i=1}^n-\frac{\partial \dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)}{\partial \mu}$\\
+$=\sum_{i=1}^n-\frac{\partial \dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)}{\partial (\mathbf{X}_i-\mu)}\frac{\partial (\mathbf{X}_i-\mu)}{\partial \mu}$\\
+$=\sum\limits_{i=1}^n-\dfrac{1}{2}(2\mathbf{\Sigma}(\mathbf{X}-\mu))(-1)$\\
+$=\sum\limits_{i=1}^n\mathbf{\Sigma}(\mathbf{X}_i-\mu)$\\
+$=\mathbf{\Sigma}(\sum\limits_{i=1}^n\mathbf{X}_i-n\mu)$\\
+
+So $\frac{\partial l(\mu,\mathbf{\Sigma})}{\partial \mu}=0\Rightarrow \mathbf{\Sigma}(\sum\limits_{i=1}^n\mathbf{X}_i-n\mu)=0\Rightarrow\hat{\mu}=\dfrac{1}{n}\sum\limits_{i=1}^n\mathbf{X}_i$\\
+
+So above all, the log-likelihood function is $l(\mu,\mathbf{\Sigma})=n\cdot\log(\frac{1}{(2\pi)^\frac{p}{2}|\mathbf{\Sigma}|^{\frac{1}{2}}})-\sum\limits_{i=1}^n\dfrac{1}{2}(\mathbf{X}_i-\mu)^T\mathbf{\Sigma}(\mathbf{X}_i-\mu)$\\
+And the MLE of $\mu$ is $\hat{\mu}=\dfrac{1}{n}\sum\limits_{i=1}^n\mathbf{X}_i$\\
 
 (c)
 
@@ -82,16 +112,20 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 		always passes through the point $(\bar{x},\bar{y})$,
 		where $\bar{x} = \tfrac{1}{n}\sum_{i=1}^{n}x_{i}$ and $\bar{y} = \tfrac{1}{n}\sum_{i=1}^{n}y_{i}$ denote the sample means.~\defpoints{3}
 	\end{itemize}
-(a)
+
+
+(a) 
 
 
 
-(b)
-
+(b) 
 
 
 
 (c)
+
+
+
 
 
 
@@ -125,18 +159,51 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 				\label{tab:my_label}
 			\end{table}
 	      \end{itemize}
-(a)
-
-
-
-
-(b)
-
-
-
-
-(c)
       	  
+(a) Linear
+
+
+
+
+
+
+
+
+
+
+(b) As we have learned in linear algebra, we know that tha matrix
+$X^TX$ must be similiar and diagonalizable.\\
+i.e. there must exist a matrix $P$ and a diagonal matrix $\Lambda$ such that $X^TX=P\Lambda P^{-1}$.\\
+Also $\forall x\in\mathbb{R}^n$, we have $x^T(\mathbf{X}^T\mathbf{X}) x=(\mathbf{X}x)^T(\mathbf{X}x)=\|\mathbf{X}x\|_2^2\geq0$.\\
+So $X^TX$ is positive semi-definite.\\
+So all eigenvalues of $X^TX$ are non-negative.\\
+i.e. the diagonal matrix $\Lambda$'s elements are all positive.
+
+And since $\lambda>0$, so $\lambda I$'s all elements are all also non-negative, and $\lambda I$ is also a diagonal matrix.\\
+So $X^TX+\lambda I=P\Lambda P^{-1}+\lambda PIP^{-1}=P(\Lambda+\lambda I)P^{-1}$.\\
+Since $\Lambda, \lambda I$ are all diagonal matrix, so $\Lambda+\lambda I$ is also a diagonal matrix.\\
+And all elements in $\Lambda+\lambda I$ are all positive, this is because in $Lambda$, elements are non-nagetiva, in $\lambda I$, all elements are positive.
+So $\Lambda+\lambda I$ is positive defined.\\
+Since $X^TX+\lambda I=P(\Lambda+\lambda I)P^{-1}$,
+from the knowledge of similarity and diagonalizable, we could know that $X^TX+\lambda I$ is also positive defined.\\
+So $X^TX+\lambda I$ is invertible.\\
+
+And let $f(\beta)=\|\mathbf{y}-\mathbf{X}\mathbf{\beta}\|_2^2 + \lambda\|\beta\|_2^2=(\mathbf{y}-\mathbf{X}\mathbf{\beta})^T(\mathbf{y}-\mathbf{X}\mathbf{\beta})+\lambda\beta^T\beta=\mathbf{y}^T\mathbf{y}-\beta^T\mathbf{X}^T\mathbf{y}-\mathbf{y}^T\mathbf{X}\beta+\beta^T\mathbf{X}^T\mathbf{X}\beta+\lambda\beta^T\beta$\\
+Since $f(\beta)$ is convex, so we just need to set the derivative of $f(\beta)$ to 0 to get the optimal solution.\\
+$\frac{\partial f(\beta)}{\partial \beta}=2(-\mathbf{X}^T\mathbf{y}+\mathbf{X}^T\mathbf{X}\beta+\lambda\beta)$\\
+$\frac{\partial f(\beta)}{\partial \beta}=0\Rightarrow (\mathbf{X}^\mathbf{X}+\lambda I)\beta=\mathbf{X}^T\mathbf{y}\Rightarrow \beta=(\mathbf{X}^T\mathbf{X}+\lambda I)^{-1}\mathbf{X}^T\mathbf{y}$\\
+
+Since we have proved that $X^TX+\lambda I$ is invertible, so $(\mathbf{X}^T\mathbf{X}+\lambda I)^{-1}$ exists.
+So $\beta *=(\mathbf{X}^T\mathbf{X}+\lambda I)^{-1}\mathbf{X}^T\mathbf{y}$\\
+
+So above all, the optimal solution $\beta *=(\mathbf{X}^T\mathbf{X}+\lambda I)^{-1}\mathbf{X}^T\mathbf{y}$.\\
+
+(c)     	  
+
+
+
+
+
       	  
       	  \newpage
 
