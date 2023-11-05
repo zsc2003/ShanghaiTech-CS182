@@ -60,33 +60,66 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 
 		  \textbf{Solution:}
 
-		  (a)
+ 		  (a) Since $f$ is a norm function, we have the properties of norm functions that,\\
+		  1. $\forall \mathbf{x},\mathbf{y}\in \mathbb{R}^{n}, f(\mathbf{x}+\mathbf{y})\leq f(\mathbf{x})+f(\mathbf{y})$.\\
+		  2. $\forall \mathbf{x}\in \mathbb{R}^{n}, \forall a \in \mathbb{R}, f(ax)=|a|f(\mathbf{x})$.\\
 
+		  So we have, $\forall \mathbf{x},\mathbf{y}\in \mathbb{R}^{n}, \forall \lambda \in [0,1]$.\\
+		  From property 1., we can get that 
+		  $$f(\lambda \mathbf{x}+(1-\lambda)\mathbf{y})\leq f(\lambda x)+f((1-\lambda)\mathbf{y})$$
+		  From property 2., we can get that
+		  $$f(\lambda x)=|\lambda|f(\mathbf{x})\ and\ f((1-\lambda)\mathbf{y})=|1-\lambda|f(\mathbf{y})$$
+		  Since $\lambda \in [0,1]$, so we have $|\lambda|=\lambda$ and $|1-\lambda|=1-\lambda$,\\
+		  So we can get that
+		  $$f(\lambda \mathbf{x}+(1-\lambda)\mathbf{y})\leq \lambda f(\mathbf{x})+(1-\lambda)f(\mathbf{y})$$
+		  
+		  So above all, from the defination, we can get that $f$ is a convex function.\\
 
+		  (b) Since $f(x_1,x_2)=\dfrac{x_1^2}{x_2}$, so we have the Hessain matrix of $f$ is
+		  $$H=\nabla^2f(x_1,x_2)=
+		  \begin{bmatrix}
+		  \frac{2}{x_2} & -\frac{2x_1}{x_2^2}\\
+		  -\frac{2x_1}{x_2^2} & \frac{2x_1^2}{x_2^3}
+	      \end{bmatrix}$$
+		  Since $x_2 > 0$, so $|H|=\dfrac{2}{x_2}\cdot\dfrac{2x_1^2}{x_2^3}-(-\dfrac{2x_1}{x_2^2})^2=\dfrac{4x_1^2}{x_2^4}-\dfrac{4x_1^2}{x_2^4}=0\geq 0$\\
+		  So we can get that $\nabla^2f(x_1,x_2)\succeq 0$, so $f$ is a convex function.\\
 
+		  So above all, $f$ is a convex function.\\
 
+		  (c) Since $f(x_1,x_2)=\dfrac{x_1}{x_2}$, so we have the Hessain matrix of $f$ is
+		  $$H=\nabla^2f(x_1,x_2)=
+		  \begin{bmatrix}
+		  0 & -\frac{1}{x_2^2}\\
+		  -\frac{1}{x_2^2} & \frac{2x_1}{x_2^3}
+	      \end{bmatrix}$$
+		  Since $x_2 > 0$, so $|H|=\dfrac{2x_1}{x_2^3}\cdot 0-(-\dfrac{1}{x_2^2})^2=-\dfrac{1}{x_2^4}\leq 0$\\
+		  So we can get that $\nabla^2f(x_1,x_2)\preceq 0$, so $f$ is a concave function.\\
 
-		  (b)
+		  So above all, $f$ is a concave function.\\
 
+		  (d) We can construct a distribution $X$ s.t.\\
+		  the domain of $X$ is $\dfrac{a_i}{b_i}, i\in\{1,2,\cdots,n\}$, and the PMF of $X$ is $P(X=\dfrac{a_i}{b_1})=\dfrac{b_i}{\sum\limits_{i=1}^{n}b_i}$.\\
+		  Since $\forall i \in\{1,2,\cdots,n\}, a_i > 0, b_i > 0$,\\
+		  So $P(X=\dfrac{a_i}{b_i}) > 0$, and $\sum\limits_{i=1}^{n}P(X=\dfrac{a_i}{b_i})=1$.\\
+		  So it's a valid distribution.\\
+		  So $$\mathbb{E}(X)=\sum\limits_{i=1}^{n} (\dfrac{a_i}{b_i})\cdot P(X=\dfrac{a_i}{b_i})=\sum\limits_{i=1}^{n} \dfrac{a_i}{b_i}\cdot \dfrac{b_i}{\sum\limits_{k=1}^{n}b_k}=\dfrac{\sum\limits_{i=1}^{n}a_i}{\sum\limits_{i=1}^{n}b_i}$$
 
+		  And since $f(x)=x\log x$ is strictly convex, so from the Jensen's inequality, we can get that\\
+		  $$f(\mathbb{E}(X)) \leq \mathbb{E}(f(X))$$
+		  i.e.
+		  $$\left(\dfrac{\sum\limits_{i=1}^{n}a_i}{\sum\limits_{i=1}^{n}b_i}\right)\log \left(\dfrac{\sum\limits_{i=1}^{n}a_i}{\sum\limits_{i=1}^{n}b_i}\right) 
+		  \leq \sum\limits_{i=1}^{n} P(X=\dfrac{a_i}{b_i})\cdot f(\dfrac{a_i}{b_i})$$
+		  $$\left(\dfrac{\sum\limits_{i=1}^{n}a_i}{\sum\limits_{i=1}^{n}b_i}\right)\log \left(\dfrac{\sum\limits_{i=1}^{n}a_i}{\sum\limits_{i=1}^{n}b_i}\right)
+		  \leq \sum\limits_{i=1}^{n} \dfrac{b_i}{\sum\limits_{k=1}^nb_k}\cdot(\dfrac{a_i}{b_i})\log(\dfrac{a_i}{b_i})$$
+		  
+		  Since $b_i>0$, so $\sum\limits_{i=1}^nb_i>0$, so appointment $\sum\limits_{i=1}^nb_i$ on both sides simultaneously, we can get that
+		  $$\left(\sum\limits_{i=1}^{n} a_i\right) \log \left(\dfrac{\sum\limits_{i=1}^{n} a_i}{\sum\limits_{i=1}^{n} b_i}\right)
+		  \leq \sum\limits_{i=1}^{n} a_i\log \left(\dfrac{a_i}{b_i}\right)$$
+		  
+		  i.e. $$\sum\limits_{i=1}^{n} a_i \log \frac{a_i}{b_i} \geq \left( \sum_{i=1}^{n} a_i\right) \log \frac{\sum_{i=1}^{n} a_i}{\sum_{i=1}^{n} b_i}$$
 
-
-
-		  (c)
-
-
-
-
-
-
-		  (d)
-
-
-
-
-
-
-
+		  So above all, with such construction, we have proved the inequality
+		  $$\sum_{i=1}^{n} a_i \log \frac{a_i}{b_i} \geq \left( \sum_{i=1}^{n} a_i\right) \log \frac{\sum_{i=1}^{n} a_i}{\sum_{i=1}^{n} b_i}$$
 
 	      \newpage
 
