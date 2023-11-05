@@ -62,13 +62,13 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 
  		  (a) Since $f$ is a norm function, we have the properties of norm functions that,\\
 		  1. $\forall \mathbf{x},\mathbf{y}\in \mathbb{R}^{n}, f(\mathbf{x}+\mathbf{y})\leq f(\mathbf{x})+f(\mathbf{y})$.\\
-		  2. $\forall \mathbf{x}\in \mathbb{R}^{n}, \forall a \in \mathbb{R}, f(ax)=|a|f(\mathbf{x})$.\\
+		  2. $\forall \mathbf{x}\in \mathbb{R}^{n}, \forall a \in \mathbb{R}, f(a\mathbf{x})=|a|f(\mathbf{x})$.\\
 
 		  So we have, $\forall \mathbf{x},\mathbf{y}\in \mathbb{R}^{n}, \forall \lambda \in [0,1]$.\\
 		  From property 1., we can get that 
-		  $$f(\lambda \mathbf{x}+(1-\lambda)\mathbf{y})\leq f(\lambda x)+f((1-\lambda)\mathbf{y})$$
+		  $$f(\lambda \mathbf{x}+(1-\lambda)\mathbf{y})\leq f(\lambda \mathbf{x})+f((1-\lambda)\mathbf{y})$$
 		  From property 2., we can get that
-		  $$f(\lambda x)=|\lambda|f(\mathbf{x})\ and\ f((1-\lambda)\mathbf{y})=|1-\lambda|f(\mathbf{y})$$
+		  $$f(\lambda \mathbf{x})=|\lambda|f(\mathbf{x})\ and\ f((1-\lambda)\mathbf{y})=|1-\lambda|f(\mathbf{y})$$
 		  Since $\lambda \in [0,1]$, so we have $|\lambda|=\lambda$ and $|1-\lambda|=1-\lambda$,\\
 		  So we can get that
 		  $$f(\lambda \mathbf{x}+(1-\lambda)\mathbf{y})\leq \lambda f(\mathbf{x})+(1-\lambda)f(\mathbf{y})$$
@@ -202,12 +202,12 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
       	  \textbf{Solution:}\\
 		  (a) From Bayes' Rule, we can get that
 		  $$p(\lambda|\mathcal{D})=\dfrac{p(\mathcal{D}|\lambda)p(\lambda)}{p(\mathcal{D})}$$
-		  Since $\mathcal{D}$ has no relation with $\lambda$, so we can get that
+		  Since $\mathcal{D}$ do not contain any $\lambda$, so we can get that
 		  $$p(\lambda|\mathcal{D})\propto p(\mathcal{D}|\lambda)p(\lambda)$$
-		  And since $\mathcal{D}={x_1,x_2,\cdots,x_n}$ are i.i.d. samples from exponential distribution with parameter $\lambda > 0$, so we can get that
+		  And since $\mathcal{D}=\{x_1,x_2,\cdots,x_n\}$ are i.i.d. samples from exponential distribution with parameter $\lambda > 0$, so we can get that
 		  $$p(\mathcal{D}|\lambda)=p(x_1,x_2,\cdots,x_n|\lambda)=\prod\limits_{i=1}^np(x_i|\lambda)$$
 		  Since $p(x|\lambda)=\lambda e^{-\lambda x},x>0$, so WLOG, we can assume that all the sampling points are positive,
-		  i.e. $\forall i, x_i>0$, so we can get that
+		  i.e. $\forall i, x_i>0$, then we can get that
 		  $$p(\mathcal{D}|\lambda)=\prod\limits_{i=1}^n\lambda e^{-\lambda x_i}=\lambda^n e^{-\lambda\sum\limits_{i=1}^nx_i}$$
 		  And since we know that the prior distribution of $\lambda$ is that $\lambda\sim Gamma(\alpha,\beta)$,
 		  so we can get that
@@ -225,7 +225,8 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 		  and $p(\lambda|\mathcal{D})\propto\lambda^{n+\alpha-1}e^{-\lambda(\sum\limits_{i=1}^nx_i+\beta)}$.\\
 		  So the MAP for $\lambda$ under $Gamma(\alpha,\beta)$ prior is that
 		  $$\hat{\lambda}_{MAP}=\argmax\limits_{\lambda}\lambda^{\alpha+n-1}e^{-\lambda(\beta+\sum\limits_{i=1}^nx_i)}$$
-		  Take the log-likelyhood function, the result of MAP is the same, So
+		  Take it into the log-likelyhood function, the result of MAP is the same.\\
+		  So
 		  $$\hat{\lambda}_{MAP}=\argmax\limits_{\lambda}(\alpha+n-1)\log\lambda-(\beta+\sum\limits_{i=1}^nx_i)\lambda$$
 		  Let $$f(\lambda)=(\alpha+n-1)\log\lambda-(\beta+\sum\limits_{i=1}^nx_i)\lambda$$
 		  then $$f'(\lambda)=\dfrac{\alpha+n-1}{\lambda}-(\beta+\sum\limits_{i=1}^nx_i)$$
@@ -253,7 +254,7 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 		  so $$\mathbb{E}(\dfrac{n-1}{n}\hat{\lambda}_{MLE})=(n-1)\mathbb{E}(\dfrac{1}{Y})=(n-1)\cdot\dfrac{\lambda}{n-1}=\lambda$$
 
 		  So above all, $\dfrac{n-1}{n}\hat{\lambda}_{MLE}$ is unbiased.\\
-		  
+
       	  \newpage
 
 	\item \defpoints{10} [Graphical Models]
@@ -279,10 +280,7 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 		\end{itemize}
 
 		\textbf{Solution:}\\
-		(a)
-
-
-
+		(a) $P(X_1,\cdots,X_)=P(X_1)P(X_2|X_3)P(X_3|X_1)P(X_4|X_3,X_7)P(X_5|X_2)P(X_6|X_2)P(X_7)$\\
 
 		(b)
 
