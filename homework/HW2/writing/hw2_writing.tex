@@ -253,7 +253,12 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 		  so $$\mathbb{E}(\dfrac{1}{Y})=\dfrac{\lambda}{n-1}$$
 		  so $$\mathbb{E}(\dfrac{n-1}{n}\hat{\lambda}_{MLE})=(n-1)\mathbb{E}(\dfrac{1}{Y})=(n-1)\cdot\dfrac{\lambda}{n-1}=\lambda$$
 
-		  So above all, $\dfrac{n-1}{n}\hat{\lambda}_{MLE}$ is unbiased.\\
+		  But there has a problem that, when $n=1$, then in the upper steps, many steps include $\dfrac{1}{n-1}$ become valid, and 
+		  $\Gamma(n-1)=\Gamma(0)$ is not valid, $Gamma(n-1,\lambda)\sim\Gamma(0,\lambda)$ is also not a valid distribution.\\
+		  Actually, since $\lambda>0$, and when $n=1$, $\mathbb{E}(\frac{n-1}{n}\hat{\lambda}_{MLE})=0\neq\lambda$.\\
+		  
+		  So above all, when $n=1$, $\dfrac{n-1}{n}\hat{\lambda}_{MLE}$ is not unbiased.\\
+		  When $n>1$, $\dfrac{n-1}{n}\hat{\lambda}_{MLE}$ is unbiased.\\
 
       	  \newpage
 

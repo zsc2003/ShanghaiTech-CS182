@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  5 NOV 2023 20:51
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  6 NOV 2023 19:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -616,7 +616,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 107--108
  []
 
 [2] [3] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 256--257
+Underfull \hbox (badness 10000) in paragraph at lines 256--259
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 260--262
 
  []
 
@@ -624,7 +629,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 256--257
 File: figures/bn.pdf Graphic file (type pdf)
 <use figures/bn.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 282--284
+Underfull \hbox (badness 10000) in paragraph at lines 287--289
 
  []
 
