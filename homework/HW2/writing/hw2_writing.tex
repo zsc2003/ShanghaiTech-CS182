@@ -81,8 +81,16 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 		  \frac{2}{x_2} & -\frac{2x_1}{x_2^2}\\
 		  -\frac{2x_1}{x_2^2} & \frac{2x_1^2}{x_2^3}
 	      \end{bmatrix}$$
-		  Since $x_2 > 0$, so $|H|=\dfrac{2}{x_2}\cdot\dfrac{2x_1^2}{x_2^3}-(-\dfrac{2x_1}{x_2^2})^2=\dfrac{4x_1^2}{x_2^4}-\dfrac{4x_1^2}{x_2^4}=0\geq 0$\\
-		  So we can get that $\nabla^2f(x_1,x_2)\succeq 0$, so $f$ is a convex function.\\
+		  So $\forall\mathbf{y}\in\mathbb{R}^2$, let $\mathbf{y}=(y_1,y_2)^T$, we have
+		  $$\mathbf{y}^TH\mathbf{y}=\begin{bmatrix}
+		  y_1 & y_2\end{bmatrix}
+	  	  \begin{bmatrix}\frac{2}{x_2} & -\frac{2x_1}{x_2^2}\\
+	  	  -\frac{2x_1}{x_2^2} & \frac{2x_1^2}{x_2^3}\end{bmatrix}
+		  \begin{bmatrix}y_1\\y_2\end{bmatrix}
+		  =\frac{2y_1^2}{x_2}-\frac{4x_1y_1y_2}{x_2^2}+\frac{2x_1^2y_2^2}{x_2^3}=\dfrac{2}{x_2}\left(y_1-\dfrac{x_1y_2}{x_2}\right)^2\geq 0$$
+
+		  Since $x_2 > 0$, so $\forall\mathbf{y}\in\mathbb{R}^2$, we have $\mathbf{y}^TH\mathbf{y}\geq 0$.\\
+		  So we can get that $H=\nabla^2f(x_1,x_2)\succeq 0$, so $f$ is a convex function.\\
 
 		  So above all, $f$ is a convex function.\\
 
@@ -92,10 +100,23 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 		  0 & -\frac{1}{x_2^2}\\
 		  -\frac{1}{x_2^2} & \frac{2x_1}{x_2^3}
 	      \end{bmatrix}$$
-		  Since $x_2 > 0$, so $|H|=\dfrac{2x_1}{x_2^3}\cdot 0-(-\dfrac{1}{x_2^2})^2=-\dfrac{1}{x_2^4}\leq 0$\\
-		  So we can get that $\nabla^2f(x_1,x_2)\preceq 0$, so $f$ is a concave function.\\
+		  Let $\mathbf{y}\in\mathbb{R}^2=(y_1,y_2)^T$, we have
+		  $$\mathbf{y}^TH\mathbf{y}=\begin{bmatrix}
+		  y_1 & y_2\end{bmatrix}
+		  \begin{bmatrix}0 & -\frac{1}{x_2^2}\\
+		  -\frac{1}{x_2^2} & \frac{2x_1}{x_2^3}\end{bmatrix}
+		  \begin{bmatrix}y_1\\y_2\end{bmatrix}
+		  =-\dfrac{2y_2}{x_2^3}(x_1y_2-x_2y_1)$$
+		  
+		  Since $x_1>0,x_2>0$, so:\\
+		  If $\mathbf{y}=(0,0)^T$, then $\mathbf{y}^TH\mathbf{y}=0$.\\
+		  If $\mathbf{y}=(\dfrac{2x_1}{x_2},1)^T$, then $\mathbf{y}^TH\mathbf{y}=-\dfrac{2x_1}{x_2^3}<0$.\\
+		  If $\mathbf{y}=(\dfrac{x_1}{2x_2},1)^T$, then $\mathbf{y}^TH\mathbf{y}=\dfrac{x_1}{x_2^3}>0$.\\
 
-		  So above all, $f$ is a concave function.\\
+		  So $\mathbf{y}^TH\mathbf{y}$ can be positive, $0$, or negative, when $\mathbf{y}$ takes different values.\\ 
+		  so $H=\nabla^2f(x_1,x_2)$ is neither positive semidefinite nor negative semidefinite.\\
+		
+		  So above all, $f$ is neither a convex nor a concave function.\\
 
 		  (d) We can construct a distribution $X$ s.t.\\
 		  the domain of $X$ is $\dfrac{a_i}{b_i}, i\in\{1,2,\cdots,n\}$, and the PMF of $X$ is $P(X=\dfrac{a_i}{b_1})=\dfrac{b_i}{\sum\limits_{i=1}^{n}b_i}$.\\
@@ -285,9 +306,9 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 		\end{itemize}
 
 		\textbf{Solution:}\\
-		(a) $P(X_1,\cdots,X_)=P(X_1)P(X_2|X_3)P(X_3|X_1)P(X_4|X_3,X_7)P(X_5|X_2)P(X_6|X_2)P(X_7)$\\
+		(a) $P(X_1,\cdots,X_7)=P(X_1)P(X_2|X_3)P(X_3|X_1)P(X_4|X_3,X_7)P(X_5|X_2)P(X_6|X_2)P(X_7)$\\
 
-		(b)
+		(b) Yes.\\
 
 
 

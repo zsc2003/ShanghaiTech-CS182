@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  7 NOV 2023 00:04
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  8 NOV 2023 00:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -589,63 +589,73 @@ Underfull \hbox (badness 10000) in paragraph at lines 76--77
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--86
+Underfull \hbox (badness 10000) in paragraph at lines 92--94
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 94--97
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
 
  []
 
 [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 98--99
+Underfull \hbox (badness 10000) in paragraph at lines 111--115
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 107--108
-
- []
-
-[2] [3] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 256--259
+Underfull \hbox (badness 10000) in paragraph at lines 116--118
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--262
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
 
  []
 
-[6]
+
+Underfull \hbox (badness 10000) in paragraph at lines 128--129
+
+ []
+
+[2] [3] [4] [5] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 277--280
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 281--283
+
+ []
+
+[7]
 File: figures/bn.pdf Graphic file (type pdf)
 <use figures/bn.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--289
+Underfull \hbox (badness 10000) in paragraph at lines 308--310
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 304--308
+Underfull \hbox (badness 10000) in paragraph at lines 311--312
 
  []
 
-[7] (./hw2_writing.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 325--329
+
+ []
+
+[8] (./hw2_writing.aux) ) 
 Here is how much of TeX's memory you used:
  16922 strings out of 476179
  332163 string characters out of 5813072
- 807222 words of memory out of 5000000
+ 810223 words of memory out of 5000000
  37324 multiletter control sequences out of 15000+600000
  482174 words of font info for 85 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  100i,11n,104p,418b,401s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on hw2_writing.pdf (7 pages).
+Output written on hw2_writing.pdf (8 pages).
