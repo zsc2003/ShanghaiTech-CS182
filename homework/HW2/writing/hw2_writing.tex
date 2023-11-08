@@ -309,18 +309,18 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 		(a) $P(X_1,\cdots,X_7)=P(X_1)P(X_2|X_3)P(X_3|X_1)P(X_4|X_3,X_7)P(X_5|X_2)P(X_6|X_2)P(X_7)$\\
 
 		(b) Yes.\\
+		During the path of $X_1$ and $X_5$ the variables along the path is $\{X_1,X_3,X_2,X_5\}$.\\
+		And since $X_2$ is given, and its the "head to tail" of the path, so $X_1\perp X_5|X_2$.\\
 
+		(c) Yes.\\
+		During the path of $X_5$ and $X_7$ the variables along the path is $\{X_5,X_2,X_3,X_4,X_7\}$.\\
+		Although $X_4$ is given, making the path not active, but $X_3$ is also given, so it blocks the path.\\
+		So $X_5\perp X_7|X_3,X_4$.\\
 
-
-
-		(c)
-
-
-
-		(d)
-
-
-
+		(d) No.\\
+		During the path of $X_5$ and $X_7$ the variables along the path is $\{X_5,X_2,X_3,X_4,X_7\}$.\\
+		$X_4$ is given, making the path not active, so the path is not blocked.\\
+		So $X_5\not\perp X_7|X_4$.\\
 
 		(e) The parents of $X_3$ is $\{X_1\}$.\\
 		The children of $X_3$ is $\{X_2,X_4\}$.\\
