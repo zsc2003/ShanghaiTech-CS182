@@ -171,16 +171,31 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 			using gradient ascent. (The gradient of $\ell(\beta)$ w.r.t. $\beta_2,\ldots,\beta_k$ is similar, you don't need to write them)~\defpoints{6}
 		  \end{itemize}
 		  \textbf{Solution:}\\
-		  (a) 
+		  (a) Since the model with softmax function is that $p(y_c^i=1|x^i;\beta)=\dfrac{exp(\beta_c^Tx^i)}{\sum\limits_{c'}exp(\beta_{c'}^Tx^i)}$.\\
+		  And since $y^i$ is a one-hot binary vector, so $y_t^i=1$, and $\forall c'\neq t, y_{c'}^i=0$.\\
+		  So $\forall i\in\{1,2,\cdots,n\},\forall c\in\{1,2,\cdots,k\}$, we have
+		  $$p(y^i|x^i;\beta)=p(y_t^i|x^i;\beta)=\prod\limits_{c'=1}^k p(y_{c'}^i|x^i;\beta)^{y_{c'}^i}$$
+		  
+		  So the likelihood is that
+		  $$L(\beta)=\prod\limits_{i=1}^np(y^i|x^i;\beta)=\prod\limits_{i=1}^n\prod\limits_{c=1}^k p(y_c^i|x^i;\beta)^{y_c^i}$$
+		  So the log-likelihood is that
+		  $$\ell(\beta)=\log L(\beta)=\sum\limits_{i=1}^n\sum\limits_{c=1}^k y_c^i\log p(y_c^i|x^i;\beta)=\sum\limits_{i=1}^n\sum\limits_{c=1}^k y_c^i\log\dfrac{exp(\beta_c^Tx^i)}{\sum\limits_{c'}exp(\beta_{c'}^Tx^i)}$$
+		  $$=\sum\limits_{i=1}^n\sum\limits_{c=1}^k\left[y_c^i(\beta_c^Tx^i)-y_c^i\log(\sum\limits_{c'}exp(\beta_{c'}^Tx^i))\right]$$
 
+		  So above all, the log-likelihood is that
+		  $$\ell(\beta)=\sum\limits_{i=1}^n\sum\limits_{c=1}^k\left[y_c^i(\beta_c^Tx^i)-y_c^i\log(\sum\limits_{c'}exp(\beta_{c'}^Tx^i))\right]$$
 
-
-
-
-
-		  (b)
-
-
+		  (b) The gradient of $\ell(\beta)$ w.r.t. $\beta_1$ is that
+		  $$\nabla_{\beta_1}\ell(\beta)=\nabla_{\beta_1}\sum\limits_{i=1}^n\sum\limits_{c=1}^k\left[y_c^i(\beta_c^Tx^i)-y_c^i\log(\sum\limits_{c'}exp(\beta_{c'}^Tx^i))\right]$$
+		  
+		 
+		 
+		 
+		 
+		  If $c\neq 1$, then $\nabla_{\beta_1}\beta_c^Tx^i=0$, and if $c=1$, then $\nabla_{\beta_1}\beta_c^Tx^i=x^i$.\\
+		  And $\nabla_{\beta_1}\log(\sum\limits_{c'}exp(\beta_{c'}^Tx^i))=\dfrac{1}{\sum\limits_{c'}\beta_{c'}^Tx^i}x^i$.\\
+		  So
+		  $$\nabla_{\beta_1}\ell(\beta)=\sum\limits_{i=1}^n\sum\limits_{c=1}^k\left(y_c^ix^i-y_c^i\cdot\dfrac{1}{\sum\limits_{c'}\beta_{c'}^Tx^i}x^i\right)$$
 
 
 
