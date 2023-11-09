@@ -122,8 +122,11 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 		  So $P(X=\dfrac{a_i}{b_i}) > 0$, and $\sum\limits_{i=1}^{n}P(X=\dfrac{a_i}{b_i})=1$.\\
 		  So it's a valid distribution.\\
 		  So $$\mathbb{E}(X)=\sum\limits_{i=1}^{n} (\dfrac{a_i}{b_i})\cdot P(X=\dfrac{a_i}{b_i})=\sum\limits_{i=1}^{n} \dfrac{a_i}{b_i}\cdot \dfrac{b_i}{\sum\limits_{k=1}^{n}b_k}=\dfrac{\sum\limits_{i=1}^{n}a_i}{\sum\limits_{i=1}^{n}b_i}$$
+		  
 
-		  And since $f(x)=x\log x$ is strictly convex, so from the Jensen's inequality, we can get that\\
+		  And since $f(x)=x\log x$, so $f'(x)=1+\log x$, $f''(x)=\dfrac{1}{x}$.\\
+		  Since $x>0$, so $f''(x)=\dfrac{1}{x}>0$.\\
+		  So $f(x)$ is strictly convex, so from the Jensen's inequality, we can get that\\
 		  $$f(\mathbb{E}(X)) \leq \mathbb{E}(f(X))$$
 		  i.e.
 		  $$\left(\dfrac{\sum\limits_{i=1}^{n}a_i}{\sum\limits_{i=1}^{n}b_i}\right)\log \left(\dfrac{\sum\limits_{i=1}^{n}a_i}{\sum\limits_{i=1}^{n}b_i}\right) 
