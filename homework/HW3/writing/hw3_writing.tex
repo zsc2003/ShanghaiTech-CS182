@@ -1,0 +1,175 @@
+%!TEX program = xelatex
+\documentclass[10pt]{article}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{arrows}
+\usepackage{subfigure}
+\usepackage{graphicx,booktabs,multirow}
+\usepackage[a4paper]{geometry}
+\usepackage{upquote}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{amsthm}
+\usepackage{bbm}
+
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\lstset{language=Matlab}
+\lstset{breaklines}
+
+\input defs.tex
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+
+\titleformat*{\section}{\centering\LARGE\scshape}
+\renewcommand{\thesection}{\Roman{section}}
+\lstset{language=Matlab,tabsize=4,frame=shadowbox,basicstyle=\footnotesize,
+keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{50,50,50},stringstyle=\ttfamily,numbers=left,numberstyle=\tiny,
+  numberstyle={\color[RGB]{192,92,92}\tiny},backgroundcolor=\color[RGB]{245,245,244},inputpath=code}
+
+\begin{document}
+
+\date{\today}
+\title{Introduction to Machine Learning, Fall 2023 \\
+	Homework 3\\
+	\small (Due Tuesday Nov. 30 at 11:59pm (CST))}
+\maketitle
+
+\begin{enumerate}[1.]
+
+
+	\item \defpoints{15} [Expectation Maximization Algorithm]
+            Consider a probabilistic model in which we collectively denote the observed variables by $\boldsymbol{X}$ and all of the hidden variables by $\boldsymbol{Z}$. The joint distribution $p(\boldsymbol{X},\boldsymbol{Z}|\theta)$ is parameterized by $\theta$. Our goal is to maximize the likelihood function given by
+            \begin{equation}
+                p(\boldsymbol{X}|\theta).
+            \end{equation}
+ 
+	      \begin{itemize}
+		      \item[(a)] Given an arbitrary distribution $q$, show that the log-likelihood of $\boldsymbol{X}$ is~\defpoints{5}
+                    \begin{equation}
+                        \log p(\boldsymbol{X}|\theta) = \mathbb{E}_{\boldsymbol{Z}\sim q}\left [ \log  \frac{p(\boldsymbol{X}, \boldsymbol{Z}|\theta)}{q(\boldsymbol{Z})}\right ] + KL\left(q(\boldsymbol{Z})\| p(\boldsymbol{Z}|\boldsymbol{X},\theta)\right).
+                    \end{equation}
+		      \item[(b)] Next let's consider the expectation step. First show the evidence lower bound (ELBO) is a lower bound of the log-likelihood, namely~\defpoints{5}
+                    \begin{equation}
+                        \log p(\boldsymbol{X}|\theta)\geq\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \frac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right],
+                    \end{equation}
+                    where $\theta^{(t-1)}$ is the parameter estimated in the previous iteration.
+		      \item[(c)] We want to maximize the ELBO, $\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \frac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]$ since maximizing $p(\boldsymbol{X}|\theta)$ is hard. EM algorithm defines $Q(\theta|\theta^{(t-1)}) := \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[ \log p(\boldsymbol{X},\boldsymbol{Z}|\theta) \right]$. The M-step is given by:
+                    \begin{equation}
+                        \theta^{(t)} \leftarrow \text{arg}\max_{\theta} Q(\theta|\theta^{(t-1)}). 
+                    \end{equation}
+                    Show that maximizing $Q(\theta|\theta^{(t-1)})$ and maximizing the ELBO is equivalent.~\defpoints{5} Formally,
+                    \begin{equation}
+                        \text{arg}\max_{\theta} Q(\theta|\theta^{(t-1)}) = \text{arg}\max_{\theta} \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \frac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]
+                    \end{equation}
+			  % \item[(d)] Prove that the likelihood is guaranteed to increase at each iteration, ~\defpoints{3}
+     %                \begin{equation}
+     %                    p(\boldsymbol{X}|\theta^{(t)}) \geq p(\boldsymbol{X}|\theta^{(t-1)}).
+     %                \end{equation}
+
+     
+	      \end{itemize}
+
+
+		  \textbf{Solution:}
+
+	      \newpage
+
+    \item ~\defpoints{15} [Boosting]
+        Suppose that we are interested in learning a classifier, such that at any turn of a game we can pose a question, like ``should I attack this ant hill now?", and get an answer.That is, we want to build a classifier which we can feed some features on the current game state, and get the output ``attack" or ``don't attack". There are many possible ways to define what the action ``attack" means, but for now let's define it as sending all friendly ants that can see the ant hill under consideration towards it.
+
+	    Let's recall the AdaBoost algorithm described in class. Its input is a dataset $\{(x_{i},y_{i})\}_{i=1}^{n}$, with $x_i$ being the $i$-th sample, and $y_{i}\in \{-1,1\}$ denoting the $i$-th label, $i=1,2,...,n$. The features might be composed of a count of the number of friendly ants that can see the ant hill under consideration, and a count of the number of enemy ants these friendly ants can see. For example, if there were 10 friendly ants that could see a particular ant hill, and 5 enemy ants that the friendly ants could see, we would have:
+	    \begin{align*}
+		    x_1 = \begin{bmatrix}
+			10 \\
+			5
+		    \end{bmatrix}.
+	    \end{align*}
+
+	    The label of the example $x_{1}$ is $y_{1} = 1$, once the friendly ants were successful in razing the enemy ant hill, and $y_{1} = 0$ otherwise. We could generate such examples by running a greedy bot (or any other opponent bot) against a bot that we periodically try to attack an enemy ant hill. Each time this bot tries the attack, we record (say, after $20$ turns or some other significant amount of time) whether the attack was successful or not.
+
+	    \begin{itemize}
+            \item[(a)] Let $\epsilon_t$ denote the error of a weak classifier $h_t$:
+		        \begin{equation}
+		            \epsilon_{t} = \sum_{i=1}^{n} D_{t}(i) \mathbbm{1}(y_{i} \neq h_{t}(x_{i})).
+		        \end{equation}
+		        In the simple “attack” / “don't attack” scenario, suppose that we have implemented the following six weak classifiers:
+		        \begin{align*}
+		            h^{(1)}(x_{i}) = 2 * \mathbbm{1}(x_{i1} \geq 2) - 1, \hspace{1cm}  & h^{(4)}(x_{i}) = 2 * \mathbbm{1}(x_{i2} \leq 2) - 1,  \\
+			        h^{(2)}(x_{i}) = 2 * \mathbbm{1}(x_{i1} \geq 6) - 1, \hspace{1cm}  & h^{(5)}(x_{i}) = 2 * \mathbbm{1}(x_{i2} \leq 6) - 1,  \\
+			        h^{(3)}(x_{i}) = 2 * \mathbbm{1}(x_{i1} \geq 10) - 1, \hspace{1cm} & h^{(6)}(x_{i}) = 2 * \mathbbm{1}(x_{i2} \leq 10) - 1. \\
+		        \end{align*}
+		        Given ten training data points ($n = 10$) as shown in Table 1,
+		        \begin{table}[t]
+                    \caption{The training data in (a).}
+                    \label{table1}
+                    \centering
+                    \begin{tabular}{|c|cc|c|}
+                    \hline
+                    $i$ & $x_{i1}$ & $x_{i2}$ & $y_{i}$ \\ \hline
+                    1 & 1.5 & 0.5 & 1 \\
+                    2 & 2.5 & 1.5 & 1 \\
+                    3 & 3.5 & 3.5 & 1 \\
+                    4 & 6.5 & 5.5 & 1 \\
+                    5 & 7.5 & 10.5 & 1 \\
+                    6 & 1.5 & 2.5 & -1 \\
+                    7 & 3.5 & 1.5 & -1 \\
+                    8 & 5.5 & 5.5 & -1 \\
+                    9 & 7.5 & 8.5 & -1 \\
+                    10 & 1.5 & 10.5 & -1 \\
+                    \hline
+                    \end{tabular}
+                \end{table}
+		        please show that what is the minimum value of $\epsilon_{1}$ and which of $h^{(1)},...,h^{(6)}$ achieve this value? Note that there may be multiple classifiers that all have the same $\epsilon_{1}$. You should list all classifiers that achieve the minimum $\epsilon_{1}$ value.~\defpoints{3}\\
+
+	        \item[(b)] For all the questions in the remainder of this section, let $h_{1}$ denote $h^{(1)}$ chosen in the first round of boosting. (That is, $h^{(1)}$ was the classifier that achieved the minimum $\epsilon_{1}$.)
+		        \begin{enumerate}
+			        \item[(1)] What is the value of $\alpha_{1}$ (the weight of this first classifier $h_{1}$)? ~\defpoints{1}\\
+
+			        \item[(2)] What should $Z_{t}$ be in order to make sure the distribution $D_{t+1}$ is normalized correctly? That is, derive the formula of $Z_{t}$ in terms of $\epsilon_{t}$ that will ensure $\sum_{i=1}^{n} D_{t+1}(i) = 1$. Please aslo derive the formula of $\alpha_{t}$ in terms of $\epsilon_{t}$. ~\defpoints{3}\\
+
+			        \item[(3)] Which points will increase in significance in the second round of boosting? That is, for which points will we have $D_{1}(i) < D_{2}(i)$? What are the values of $D_{2}$ for these points?~\defpoints{3}\\
+
+			        \item[(4)] In the second round of boosting, the weights on the points will be different, and thus the error $\epsilon_2$ will also be different. Which of $h^{(1)}, . . . , h^{(6)}$ will minimize $\epsilon_2$? (Which classifier will be selected as the second weak classifier $h_2$?) What is its value of $\epsilon_2$?~\defpoints{3}\\
+
+			        \item[(5)] What will the average error of the final classifier $H$ be, if we stop after these two rounds of boosting? That is, if $H(x) = \text{sign}(\alpha_{1}h_{1}(x) + \alpha_{2}h_{2}(x))$, what will the  training error $\epsilon = \frac{1}{n} \sum_{i=1}^{n} \mathbbm{1} (y_{i} \neq h(x_{i}))$ be? Is this more, less, or the same as the error we would get, if we just used one of the weak classifiers instead of this final classifier $H$?~\defpoints{2}\\
+
+		        \end{enumerate}
+        \end{itemize}
+		\textbf{Solution:}
+        \newpage
+
+	\item \defpoints{10} [Perceptron Learning Algorithm]
+            Consider a binary classification problem. The input space is $\mathbb{R}^{d}$. The output space is $\{ +1, -1 \}$. For simplicity, we modified the input to be $\mathbf{x} = [x_0, x_1, \cdots, x_d]^{\intercal}$ with $x_0=1$. The output is predicted using the hypothesis:
+            \begin{equation}
+                h(\mathbf{x}) = \text{sign}(\mathbf{w}^{\intercal}\mathbf{x}),
+            \end{equation}
+            where $\mathbf{w} = [w_0, w_1, \cdots, w_d]^{\intercal}$ and $w_0$ is the bias.
+            
+            The \textit{perceptron learning algorithm} determines $\mathbf{w}$ using a simple iterative method. Here is how it works. At iteration $t$, where $t=0,1,2, \ldots$, there is a current value of the weight vector, call it $\mathbf{w}(t)$. The algorithm picks an example from $\left(\mathbf{x}_1, y_1\right) \cdots\left(\mathbf{x}_N, y_N\right)$ that is currently misclassified, call it $(\mathbf{x}(t), y(t))$, and uses it to update $\mathbf{w}(t)$. Since the example is misclassified, we have $y(t) \neq$ $\operatorname{sign}\left(\mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)\right)$. The update rule is
+
+            \begin{equation}
+                \mathbf{w}(t+1)=\mathbf{w}(t)+y(t) \mathbf{x}(t).    
+            \end{equation}
+
+                
+		\begin{itemize}
+			\item[(a)] Show that $y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)<0$. [Hint: $\mathbf{x}(t)$ is misclassified by $\mathbf{w}(t)$.]~\defpoints{3} 
+			\item[(b)] Show that $y(t) \mathbf{w}^{\mathrm{T}}(t+1) \mathbf{x}(t)>y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)$. [Hint: Use (1.3).]~\defpoints{3} 
+			\item[(c)]   As far as classifying $\mathbf{x}(t)$ is concerned, argue that the move from $\mathbf{w}(t)$ to $\mathrm{w}(t+1)$ is a move ``in the right direction".~\defpoints{4} 
+		\end{itemize}
+
+		\textbf{Solution:}
+
+\end{enumerate}
+
+\end{document}
