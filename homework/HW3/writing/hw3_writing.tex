@@ -122,9 +122,9 @@ $$\log p(\boldsymbol{X}|\theta)\geq\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\th
 (c)
 $$\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]
 =\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log \dfrac{p(\boldsymbol{X},\boldsymbol{z}|\theta)}{p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})}d\boldsymbol{z}$$
-$$=\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})(\log p(\boldsymbol{X},\boldsymbol{z}|\theta) -  p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)}))d\boldsymbol{z}$$
+$$=\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})(\log p(\boldsymbol{X},\boldsymbol{z}|\theta) - \log  p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)}))d\boldsymbol{z}$$
 $$=\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log p(\boldsymbol{X},\boldsymbol{z}|\theta)d\boldsymbol{z}-\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})d\boldsymbol{z}$$
-Since $Q(\theta|\theta^{(t-1)}):=\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log p(\boldsymbol{X},\boldsymbol{Z}|\theta)\right]$
+Since $Q(\theta|\theta^{(t-1)}):=\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log p(\boldsymbol{X},\boldsymbol{Z}|\theta)\right]$.\\
 So we have
 $$\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log p(\boldsymbol{X},\boldsymbol{z}|\theta)d\boldsymbol{z}=\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log p(\boldsymbol{X},\boldsymbol{Z}|\theta)\right]=Q(\theta|\theta^{(t-1)})$$
 
