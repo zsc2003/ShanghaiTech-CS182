@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  17 NOV 2023 00:01
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  25 NOV 2023 12:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -586,48 +586,48 @@ LaTeX Warning: No \author given.
 
 [1
 
-]
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 135.
+] [2]
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 164.
  (d:/texlive/2022/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 )
-Underfull \hbox (badness 10000) in paragraph at lines 142--165
+Underfull \hbox (badness 10000) in paragraph at lines 171--194
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--169
+Underfull \hbox (badness 10000) in paragraph at lines 197--198
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 170--171
+Underfull \hbox (badness 10000) in paragraph at lines 199--200
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 172--173
+Underfull \hbox (badness 10000) in paragraph at lines 201--202
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--175
+Underfull \hbox (badness 10000) in paragraph at lines 203--204
 
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 176--177
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 205--206
 
  []
 
-[3] [4] (./hw3_writing.aux) ) 
+[4] [5] (./hw3_writing.aux) ) 
 Here is how much of TeX's memory you used:
  16968 strings out of 476179
  333372 string characters out of 5813072
- 808411 words of memory out of 5000000
+ 809414 words of memory out of 5000000
  37361 multiletter control sequences out of 15000+600000
  482577 words of font info for 89 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  100i,14n,104p,643b,393s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on hw3_writing.pdf (4 pages).
+Output written on hw3_writing.pdf (5 pages).

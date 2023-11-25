@@ -70,51 +70,80 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
                     \begin{equation}
                         \text{arg}\max_{\theta} Q(\theta|\theta^{(t-1)}) = \text{arg}\max_{\theta} \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \frac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]
                     \end{equation}
-			  % \item[(d)] Prove that the likelihood is guaranteed to increase at each iteration, ~\defpoints{3}
-     %                \begin{equation}
-     %                    p(\boldsymbol{X}|\theta^{(t)}) \geq p(\boldsymbol{X}|\theta^{(t-1)}).
-     %                \end{equation}
+			%   \item[(d)] Prove that the likelihood is guaranteed to increase at each iteration, ~\defpoints{3}
+            %         \begin{equation}
+            %             p(\boldsymbol{X}|\theta^{(t)}) \geq p(\boldsymbol{X}|\theta^{(t-1)}).
+            %         \end{equation}
 
      
 	      \end{itemize}
 
 		  \textbf{Solution:}
 
-(a) 
+(a) With Bayes' Rule, we can get that
+$$p(\boldsymbol{X}|\theta)=\dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta)}
+=\dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{q(\boldsymbol{Z})}\dfrac{q(\boldsymbol{Z})}{p(\boldsymbol{Z}|\boldsymbol{X},\theta)}$$
 
+So the log-likelihood of $\boldsymbol{X}$ is
+$$\log p(\boldsymbol{X}|\theta)=\log\left [\dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{q(\boldsymbol{Z})}\dfrac{q(\boldsymbol{Z})}{p(\boldsymbol{Z}|\boldsymbol{X},\theta)}\right ]
+=\log\dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{q(\boldsymbol{Z})}+\log\dfrac{q(\boldsymbol{Z})}{p(\boldsymbol{Z}|\boldsymbol{X},\theta)}$$
 
+Take the expectation of $\boldsymbol{Z}$ with respect to $q(\boldsymbol{Z})$ to the both side, we can get that
+$$\mathbb{E}_{\boldsymbol{Z}\sim q}\left [\log p(\boldsymbol{X}|\theta)\right ]=\mathbb{E}_{\boldsymbol{Z}\sim q}\left [\log\dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{q(\boldsymbol{Z})}+\log\dfrac{q(\boldsymbol{Z})}{p(\boldsymbol{Z}|\boldsymbol{X},\theta)}\right ]$$
+With the linearty of expectation:
+$$\mathbb{E}_{\boldsymbol{Z}\sim q}\left [\log p(\boldsymbol{X}|\theta)\right ]=\mathbb{E}_{\boldsymbol{Z}\sim q}\left [\log\dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{q(\boldsymbol{Z})}\right ]+\mathbb{E}_{\boldsymbol{Z}\sim q}\left [\log\dfrac{q(\boldsymbol{Z})}{p(\boldsymbol{Z}|\boldsymbol{X},\theta)}\right ]$$
 
-(b)
+For $\mathbb{E}_{\boldsymbol{Z}\sim q}\left [\log p(\boldsymbol{X}|\theta)\right ]$, we can get that it has nothing with $\boldsymbol{Z}$, so
+$$\mathbb{E}_{\boldsymbol{Z}\sim q}\left [\log p(\boldsymbol{X}|\theta)\right ]
+=\int q(\boldsymbol{z})\log p(\boldsymbol{X}|\theta)d\boldsymbol{z}=\log p(\boldsymbol{X}|\theta)\int q(\boldsymbol{z})d\boldsymbol{z}
+=\log p(\boldsymbol{X}|\theta)$$
 
+For $\mathbb{E}_{\boldsymbol{Z}\sim q}\left [\log\dfrac{q(\boldsymbol{Z})}{p(\boldsymbol{Z}|\boldsymbol{X},\theta)}\right ]$,
+accoding to the definition of KL divergence : $KL(p\|q)=\int p(\boldsymbol{z})\log\dfrac{p(\boldsymbol{z})}{q(\boldsymbol{z})}d\boldsymbol{z}$, we can get that
+$$\mathbb{E}_{\boldsymbol{Z}\sim q}\left [\log\dfrac{q(\boldsymbol{Z})}{p(\boldsymbol{Z}|\boldsymbol{X},\theta)}\right ]
+=\int q(\boldsymbol{z})\log\dfrac{q(\boldsymbol{z})}{p(\boldsymbol{z}|\boldsymbol{X},\theta)}d\boldsymbol{z}
+=KL(q(\boldsymbol{Z})\|p(\boldsymbol{Z}|\boldsymbol{X},\theta))$$
 
+So above all, we have proved that
+$$\log p(\boldsymbol{X}|\theta)=\mathbb{E}_{\boldsymbol{Z}\sim q}\left [\log\dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{q(\boldsymbol{Z})}\right ]+KL(q(\boldsymbol{Z})\|p(\boldsymbol{Z}|\boldsymbol{X},\theta))$$
 
+(b) For the log-likelihood:
+$$\log p(\boldsymbol{X}|\theta)=\log\int p(\boldsymbol{X},\boldsymbol{z}|\theta)d\boldsymbol{z}$$
+$$=\log\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\dfrac{p(\boldsymbol{X},\boldsymbol{z}|\theta)}{p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})}d\boldsymbol{z}$$
+$$=\log \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]$$
 
+Since $\log$ is a concave function, with Jensen's inequality, we have $\log \mathbb{E}(X)\geq \mathbb{E}(\log X)$, so
+$$\log \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]
+\geq \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]$$
+
+So above all, we have proved that the ELBO is that
+$$\log p(\boldsymbol{X}|\theta)\geq\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]$$
 
 (c)
+$$\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]
+=\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log \dfrac{p(\boldsymbol{X},\boldsymbol{z}|\theta)}{p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})}d\boldsymbol{z}$$
+$$=\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})(\log p(\boldsymbol{X},\boldsymbol{z}|\theta) -  p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)}))d\boldsymbol{z}$$
+$$=\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log p(\boldsymbol{X},\boldsymbol{z}|\theta)d\boldsymbol{z}-\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})d\boldsymbol{z}$$
+Since $Q(\theta|\theta^{(t-1)}):=\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log p(\boldsymbol{X},\boldsymbol{Z}|\theta)\right]$
+So we have
+$$\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log p(\boldsymbol{X},\boldsymbol{z}|\theta)d\boldsymbol{z}=\mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log p(\boldsymbol{X},\boldsymbol{Z}|\theta)\right]=Q(\theta|\theta^{(t-1)})$$
 
+And with the definition of entropy: $H(\boldsymbol{X})=-\int p(\boldsymbol{x})\log p(\boldsymbol{x})d\boldsymbol{x}$, we can get that
+$$-\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})d\boldsymbol{z}=H(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})$$
 
+So 
+$$\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log p(\boldsymbol{X},\boldsymbol{z}|\theta)d\boldsymbol{z}-\int p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})\log p(\boldsymbol{z}|\boldsymbol{X},\theta^{(t-1)})d\boldsymbol{z}$$
+$$=Q(\theta|\theta^{(t-1)})+H(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})$$
 
+Since $H(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})$ is a constant of $\theta$, so we can get that
+$$\argmax\limits_{\theta} \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]
+=\argmax\limits_{\theta} Q(\theta|\theta^{(t-1)}) + H(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})
+=\argmax\limits_{\theta} Q(\theta|\theta^{(t-1)})$$
 
-(d)
+So above all, we have proved that
+$$\argmax\limits_{\theta} Q(\theta|\theta^{(t-1)}) = \argmax\limits_{\theta} \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]$$
 
-
-
-
-
-(e)
-
-
-
-
-
-
-
-
-
-
-
-
-	      \newpage
+\newpage
 
     \item ~\defpoints{15} [Boosting]
         Suppose that we are interested in learning a classifier, such that at any turn of a game we can pose a question, like ``should I attack this ant hill now?", and get an answer.That is, we want to build a classifier which we can feed some features on the current game state, and get the output ``attack" or ``don't attack". There are many possible ways to define what the action ``attack" means, but for now let's define it as sending all friendly ants that can see the ant hill under consideration towards it.
