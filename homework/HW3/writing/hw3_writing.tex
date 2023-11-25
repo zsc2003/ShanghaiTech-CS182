@@ -265,23 +265,42 @@ $$\argmax\limits_{\theta} Q(\theta|\theta^{(t-1)}) = \argmax\limits_{\theta} \ma
 		\begin{itemize}
 			\item[(a)] Show that $y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)<0$. [Hint: $\mathbf{x}(t)$ is misclassified by $\mathbf{w}(t)$.]~\defpoints{3} 
 			\item[(b)] Show that $y(t) \mathbf{w}^{\mathrm{T}}(t+1) \mathbf{x}(t)>y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)$.~\defpoints{3} 
-			\item[(c)]   As far as classifying $\mathbf{x}(t)$ is concerned, argue that the move from $\mathbf{w}(t)$ to $\mathrm{w}(t+1)$ is a move ``in the right direction".~\defpoints{4} 
+			\item[(c)]   As far as classifying $\mathbf{x}(t)$ is concerned, argue that the move from $\mathbf{w}(t)$ to $\mathbf{w}(t+1)$ is a move ``in the right direction".~\defpoints{4} 
 		\end{itemize}
 
 		\textbf{Solution:}
         
-(a)
+(a) Since we are considering the misclassified, so we have $y(t) \neq \operatorname{sign}\left(\mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)\right)$.\\
+And since $y(t), \operatorname{sign}\left(\mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)\right)\in \{+1, -1\}$, so we have $y(t)\cdot\operatorname{sign}\left(\mathbf{w}^{\mathrm{T}}(t)\mathbf{x}(t)\right)=-1<0$.\\
+Suppose that $\operatorname{sign}\left(\mathbf{w}^{\mathrm{T}}(t)\mathbf{x}(t)\right)=k\cdot \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)$, where $k>0$.\\
+So $y(t)\cdot\operatorname{sign}\left(\mathbf{w}^{\mathrm{T}}(t)\mathbf{x}(t)\right)=y(t)\cdot k\cdot \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)=k\cdot y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)<0$.\\
+Since $k>0$, so we have
+$$y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)<0$$
+So above all, we have proved that $y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)<0$.
 
+(b) Since we are considering the misclassified, so we have $\mathbf{w}(t+1)=\mathbf{w}(t)+y(t) \mathbf{x}(t)$.\\
+So
+$$y(t)\mathbf{w}^T(t+1)\mathbf{x}(t)=y(t)\mathbf{w}^T(t)\mathbf{x}(t)+y(t)y(t)\mathbf{x}^T(t)\mathbf{x}(t)
+=y(t)\mathbf{w}^T(t)\mathbf{x}(t)+y^2(t)\|\mathbf{x}(t)\|^2$$
+Since $y(t)\in \{+1, -1\}$, so we have $y^2(t)=1$.\\
+And since for the simplicity, we have the input to be $\mathbf{x} = [x_0, x_1, \cdots, x_d]^{\intercal}$ with $x_0=1$, so we have
+$\mathbf{x}\neq\mathbf{0}$, i.e. $\|\mathbf{x}(t)\|^2>0$.\\
+So we have 
+$$y^2(t)\|\mathbf{x}(t)\|^2>0$$
+So
+$$y(t)\mathbf{w}^T(t+1)\mathbf{x}(t)=y(t)\mathbf{w}^T(t)\mathbf{x}(t)+y^2(t)\|\mathbf{x}(t)\|^2>y(t)\mathbf{w}^T(t)\mathbf{x}(t)$$
+So above all, we have proved that $y(t) \mathbf{w}^{\mathrm{T}}(t+1) \mathbf{x}(t)>y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)$.
 
+(c) We only consider about the misclassified case.\\
+From (a), we knew that $$y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)<0$$
+And from (b), we knew that $$y(t) \mathbf{w}^{\mathrm{T}}(t+1) \mathbf{x}(t)>y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)$$
+So we could see that the move from $\mathbf{w}(t)$ to $\mathbf{w}(t+1)$ is making the $y(t)\mathbf{w}^T\mathbf{x}(t)$ to the more positive direction, 
+and since if $y(t)\mathbf{w}^T\mathbf{x}(t)>0$, then it is a correct classification.\\ 
+And if the total input data are linearly separable, from what we have learned, we could get that with 
+at most $M=(\frac{R}{\gamma})^2$ such misclassified's movement, where $R$ is the radius of the smallest sphere that contains all the input data, and $\gamma$ is the margin,
+then we could get the correct classification.\\
 
-
-(b)
-
-
-
-(c)
-
-
+So above all, we could say that the move from $\mathbf{w}(t)$ to $\mathbf{w}(t+1)$ is a move ``in the right direction".
 
 \end{enumerate}
 

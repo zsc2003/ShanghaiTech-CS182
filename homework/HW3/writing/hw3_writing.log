@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  25 NOV 2023 20:52
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  25 NOV 2023 22:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -620,7 +620,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 207--208
 
  []
 
-[4] [5] (./hw3_writing.aux) ) 
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 296--302
+
+ []
+
+[5] (./hw3_writing.aux) ) 
 Here is how much of TeX's memory you used:
  16968 strings out of 476179
  333372 string characters out of 5813072
