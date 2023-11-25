@@ -46,6 +46,7 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 
 \begin{enumerate}[1.]
 
+
 	\item \defpoints{15} [Expectation Maximization Algorithm]
             Consider a probabilistic model in which we collectively denote the observed variables by $\boldsymbol{X}$ and all of the hidden variables by $\boldsymbol{Z}$. The joint distribution $p(\boldsymbol{X},\boldsymbol{Z}|\theta)$ is parameterized by $\theta$. Our goal is to maximize the likelihood function given by
             \begin{equation}
@@ -70,13 +71,14 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
                     \begin{equation}
                         \text{arg}\max_{\theta} Q(\theta|\theta^{(t-1)}) = \text{arg}\max_{\theta} \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \frac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]
                     \end{equation}
-			%   \item[(d)] Prove that the likelihood is guaranteed to increase at each iteration, ~\defpoints{3}
-            %         \begin{equation}
-            %             p(\boldsymbol{X}|\theta^{(t)}) \geq p(\boldsymbol{X}|\theta^{(t-1)}).
-            %         \end{equation}
+			  % \item[(d)] Prove that the likelihood is guaranteed to increase at each iteration, ~\defpoints{3}
+     %                \begin{equation}
+     %                    p(\boldsymbol{X}|\theta^{(t)}) \geq p(\boldsymbol{X}|\theta^{(t-1)}).
+     %                \end{equation}
 
      
 	      \end{itemize}
+
 
 		  \textbf{Solution:}
 
@@ -142,8 +144,8 @@ $$\argmax\limits_{\theta} \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1
 
 So above all, we have proved that
 $$\argmax\limits_{\theta} Q(\theta|\theta^{(t-1)}) = \argmax\limits_{\theta} \mathbb{E}_{\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)}}\left[\log \dfrac{p(\boldsymbol{X},\boldsymbol{Z}|\theta)}{p(\boldsymbol{Z}|\boldsymbol{X},\theta^{(t-1)})}\right]$$
-
-\newpage
+          
+	      \newpage
 
     \item ~\defpoints{15} [Boosting]
         Suppose that we are interested in learning a classifier, such that at any turn of a game we can pose a question, like ``should I attack this ant hill now?", and get an answer.That is, we want to build a classifier which we can feed some features on the current game state, and get the output ``attack" or ``don't attack". There are many possible ways to define what the action ``attack" means, but for now let's define it as sending all friendly ants that can see the ant hill under consideration towards it.
@@ -235,15 +237,15 @@ $$\argmax\limits_{\theta} Q(\theta|\theta^{(t-1)}) = \argmax\limits_{\theta} \ma
 
 
 (5)
-
-
-
-
-
-
-
-
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
         \newpage
 
 	\item \defpoints{10} [Perceptron Learning Algorithm]
@@ -262,7 +264,7 @@ $$\argmax\limits_{\theta} Q(\theta|\theta^{(t-1)}) = \argmax\limits_{\theta} \ma
                 
 		\begin{itemize}
 			\item[(a)] Show that $y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)<0$. [Hint: $\mathbf{x}(t)$ is misclassified by $\mathbf{w}(t)$.]~\defpoints{3} 
-			\item[(b)] Show that $y(t) \mathbf{w}^{\mathrm{T}}(t+1) \mathbf{x}(t)>y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)$. [Hint: Use (1.3).]~\defpoints{3} 
+			\item[(b)] Show that $y(t) \mathbf{w}^{\mathrm{T}}(t+1) \mathbf{x}(t)>y(t) \mathbf{w}^{\mathrm{T}}(t) \mathbf{x}(t)$.~\defpoints{3} 
 			\item[(c)]   As far as classifying $\mathbf{x}(t)$ is concerned, argue that the move from $\mathbf{w}(t)$ to $\mathrm{w}(t+1)$ is a move ``in the right direction".~\defpoints{4} 
 		\end{itemize}
 
@@ -278,7 +280,6 @@ $$\argmax\limits_{\theta} Q(\theta|\theta^{(t-1)}) = \argmax\limits_{\theta} \ma
 
 
 (c)
-
 
 
 

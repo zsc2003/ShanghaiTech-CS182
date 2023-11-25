@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  25 NOV 2023 12:27
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  25 NOV 2023 20:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -587,16 +587,11 @@ LaTeX Warning: No \author given.
 [1
 
 ] [2]
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 164.
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 166.
  (d:/texlive/2022/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 )
-Underfull \hbox (badness 10000) in paragraph at lines 171--194
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 197--198
+Underfull \hbox (badness 10000) in paragraph at lines 173--196
 
  []
 
@@ -615,8 +610,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 203--204
 
  []
 
-[3]
+
 Underfull \hbox (badness 10000) in paragraph at lines 205--206
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 207--208
 
  []
 
