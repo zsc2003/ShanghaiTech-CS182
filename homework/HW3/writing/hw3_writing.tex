@@ -372,12 +372,12 @@ So we can get that
     \item For $(1,1)$, we have $H(x)=\text{sign}\left(\dfrac{1}{2}\log\dfrac{3}{2}\cdot 1+\dfrac{1}{2}\log\dfrac{5}{3}\cdot 1\right)=1$.
 \end{itemize}
 
-So we can get that $x_3, x_4, x_5$ are misclassified by $H(x)$, so we have
-$$\epsilon=\dfrac{1}{n}\sum_{i=1}^n\mathbbm{1}(y_i\neq H(x_i))=\dfrac{1}{10}\cdot 3=0.3$$
+So we can get that $x_3, x_4, x_5, x_7$ are misclassified by $H(x)$(actually, $H(x)$ is exactly same with $h^{(2)}(x)$), so we have
+$$\epsilon=\dfrac{1}{n}\sum_{i=1}^n\mathbbm{1}(y_i\neq H(x_i))=\dfrac{1}{10}\cdot 4=0.4$$
 And we have $\epsilon_1=\min\limits_{i=1,2,\cdots,6}(\epsilon_1)_i=\min\{0.4, 0.4, 0.5, 0.4, 0.4, 0.5\}=0.4$,
-so we can get that $\epsilon<\epsilon_1$.\\
+so we can get that $\epsilon=\epsilon_1$.\\
 
-So above all, the average error of the final classifier $H$ is $0.3$, and it is less than the error we would get, if we just used one of the weak classifiers instead of this final classifier $H$.\\
+So above all, the average error of the final classifier $H$ is $0.4$, and it is the same as the error we would get, if we just used one of the weak classifiers instead of this final classifier $H$.\\
         
 \newpage
 
