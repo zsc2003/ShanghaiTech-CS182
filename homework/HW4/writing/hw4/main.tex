@@ -1,0 +1,147 @@
+%!TEX program = xelatex
+\documentclass[10pt]{article}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{arrows}
+\usepackage{subfigure}
+\usepackage{graphicx,booktabs,multirow}
+\usepackage[a4paper]{geometry}
+\usepackage{upquote}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{amsthm}
+\usepackage{bbm}
+
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\lstset{language=Matlab}
+\lstset{breaklines}
+
+\input defs.tex
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+
+\titleformat*{\section}{\centering\LARGE\scshape}
+\renewcommand{\thesection}{\Roman{section}}
+\lstset{language=Matlab,tabsize=4,frame=shadowbox,basicstyle=\footnotesize,
+keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{50,50,50},stringstyle=\ttfamily,numbers=left,numberstyle=\tiny,
+  numberstyle={\color[RGB]{192,92,92}\tiny},backgroundcolor=\color[RGB]{245,245,244},inputpath=code}
+
+\begin{document}
+
+ \date{}
+\title{Introduction to Machine Learning, Fall 2023 \\
+	Homework 4\\
+	\small (Due Tuesday Dec.19 at 11:59pm (CST))}
+\maketitle
+
+\begin{enumerate}[1.]
+	   \item \defpoints{15} [Maximum Margin Classifier]
+           Consider a data set of $n d$-dimensional sample points, $\left\{X_1, \ldots, X_n\right\}$. Each sample point, $X_i \in \mathbb{R}^d$, has a corresponding label, $y_i$, indicating to which class that point belongs. For now, we will assume that there are only two classes and that every point is either in the given class $\left(y_i=1\right)$ or not in the class $\left(y_i=-1\right)$. Consider the linear decision boundary defined by the hyperplane
+            $$
+            \mathcal{H}=\left\{x \in \mathbb{R}^d: x \cdot w+\alpha=0\right\} .
+            $$
+            The maximum margin classifier maximizes the distance from the linear decision boundary to the closest training point on either side of the boundary, while correctly classifying all training points.
+	      \begin{itemize}
+
+        \item[(a)] An in-class sample point is correctly classified if it is on the positive side of the decision boundary, and an out-of-class sample is correctly classified if it is on the negative side. Write a set of $n$ constraints to ensure that all $n$ points are correctly classified.~\defpoints{3}
+            \item[(b)]The maximum margin classifier aims to maximize the distance from the training points to the decision boundary. Derive the distance from a point $X_i$ to the hyperplane $\mathcal{H}$.~\defpoints{3}
+            \item[(c)] Assuming all the points are correctly classified, write an inequality that relates the distance of sample point $X_i$ to the hyperplane $\mathcal{H}$ in terms of only the normal vector $w$.~\defpoints{3}
+            \item[(d)] For the maximum margin classifier, the training points closest to the decision boundary on either side of the boundary are referred to as support vectors. What is the distance from any support vector to the decision boundary?~\defpoints{3}
+            \item[(e)] Using the previous parts, write an optimization problem for the maximum margin classifier.~\defpoints{3}
+	      \end{itemize}
+
+		  \textbf{Solution:}
+
+	      \newpage 
+% ////////////////////////////////////////////////      
+    \item \defpoints{15} Consider a dataset of $n$ observations $\mathbf{X}\in         \mathbb{R}^{n \times d}$, and our goal is to project the data onto a           subspace having dimensionality $p$, $p<d$. 
+	Prove that PCA based on projected variance maximization is equivalent to       PCA based on projected error (Euclidean error) minimization. \par
+	\textbf{Solution:}
+	
+	\newpage
+ % ////////////////////////////////////////////////  
+ \item \defpoints{15} [Performing PCA by Hand]
+ Let's do principal components analysis (PCA)! Consider this sample of six points $X_i \in \mathbb{R}^2$.
+$$
+\left\{\left[\begin{array}{l}
+0 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+0 \\
+1
+\end{array}\right],\left[\begin{array}{l}
+1 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+1 \\
+2
+\end{array}\right],\left[\begin{array}{l}
+2 \\
+1
+\end{array}\right],\left[\begin{array}{l}
+2 \\
+2
+\end{array}\right]\right\} .
+$$
+(a) [4 pts] Compute the mean of the sample points and write the centered design matrix $\dot{X}$.
+
+Hint: The sample mean is
+
+
+Hint: By subtracting the mean from each sample, we form the centered design matrix
+$$
+\dot{X}=
+$$
+(b) [5 pts] Find all the principal components of this sample. Write them as unit vectors.
+
+Hint: The principal components of our dataset are the eigenvectors of the matrix
+$$
+\dot{X}^{\top} \dot{X}=
+$$
+
+The characteristic polynomial of this symmetric matrix is
+$$
+\operatorname{det}\left(s I-X^{\top} X\right)
+$$
+
+(c) [6 pts]\\
+Which of those two principal components would be preferred if you use only one? [2 pts]\par
+What information does the PCA algorithm use to decide that one principal components is better than another? [2 pts]\par
+From an optimization point of view, why do we prefer that one? [2 pts]\par
+
+\textbf{Solution:}
+
+\newpage
+ 
+	\item \defpoints{15} [Backpropagation on an Arithmetic Expression]
+Consider an arithmetic network with the inputs $a, b$, and $c$, which computes the following sequence of operations, where $s(\gamma)=\frac{1}{1+e^{-\gamma}}$ is the logistic (sigmoid) function and $r(\gamma)=\max \{0, \gamma\}$ is the hinge function used by ReLUs.
+$$
+d=a b \quad e=s(d) \quad f=r(a) \quad g=3 a \quad h=2 e+f+g \quad i=c h \quad j=f+i^2
+$$
+
+We want to find the partial derivatives of $j$ with respect to every other variable $a$ through $i$, in backpropagation style. This means that for each variable $z$, we want you to write $\partial j / \partial z$ in two forms: (1) in terms of derivatives involving each variable that directly uses the value of $z$, and (2) in terms of the inputs and intermediate values $a \ldots i$, as simply as possible but with no derivative symbols. For example, we write
+$$
+\begin{aligned}
+& \frac{\partial j}{\partial i}=\frac{\mathrm{d} j}{\mathrm{~d} i}=2 i \quad \text { (no chain rule needed for this one only) } \\
+& \frac{\partial j}{\partial h}=\frac{\partial j}{\partial i} \frac{\partial i}{\partial h}=2 i c \quad \text { (chain rule, then backprop the derivative expressions) }
+\end{aligned}
+$$
+(a)Now, please write expressions for $\partial j / \partial g, \partial j / \partial f, \partial j / \partial e, \partial j / \partial d, \partial j / \partial c, \partial j / \partial b$, and $\partial j / \partial a$ as we have written $\partial j / \partial h$ above. If they are needed, express the derivative $s^{\prime}(\gamma)$ in terms of $s(\gamma)$ and express the derivative $r^{\prime}(\gamma)$ as the indicator function $1(\gamma \geq 0)$. (Hint: $f$ is used in two places and a is used in three, so they will need a multivariate chain rule. It might help you to draw the network as a directed graph, but it's not required.)
+
+                
+
+		\textbf{Solution:}
+
+\end{enumerate}
+
+\end{document}
