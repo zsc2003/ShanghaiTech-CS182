@@ -2,6 +2,7 @@ from builtins import range
 import numpy as np
 from random import shuffle
 from past.builtins import xrange
+# we should download the 'past' module by 'pip install future' ????!!!!
 
 def svm_loss_naive(W, X, y, reg):
     """
@@ -30,6 +31,9 @@ def svm_loss_naive(W, X, y, reg):
     for i in range(num_train):
         scores = X[i].dot(W)
         correct_class_score = scores[y[i]]
+
+        # print(f'scores = {scores}, correct_class_score = {correct_class_score}')
+
         for j in range(num_classes):
             if j == y[i]:
                 continue
@@ -42,7 +46,7 @@ def svm_loss_naive(W, X, y, reg):
     loss /= num_train
 
     # Add regularization to the loss.
-    loss += reg * np.sum(W * W)
+    loss += reg * np.sum(W * W) # W * W : element-wise multiplication
 
     #############################################################################
     # TODO:                                                                     #
@@ -53,8 +57,17 @@ def svm_loss_naive(W, X, y, reg):
     # code above to compute the gradient.                                       #
     #############################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+    # pass
+    
+    # W * W : element-wise multiplication
+    # loss = 1/N * sum(scores - correct_class_score + 1) + reg * sum(W * W)
+    # dW = dloss/dW = 1/N * sum(dloss/dscores * dscores/dW) + reg * 2 * W
 
-    pass
+
+
+
+
+
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     
@@ -78,7 +91,12 @@ def svm_loss_vectorized(W, X, y, reg):
     #############################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    pass
+    # pass
+
+
+
+
+
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -93,7 +111,13 @@ def svm_loss_vectorized(W, X, y, reg):
     #############################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-    pass
+    # pass
+
+
+
+
+
+
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
