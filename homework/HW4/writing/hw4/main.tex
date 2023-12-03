@@ -61,34 +61,79 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 	      \end{itemize}
 
 \textbf{Solution:}\\
-(a) 
+(a) Since all sample points are correctly classified, so for the in-class sample points, the label $y_i=1$ and it is on the 
+positive side of the decision boundary, so we have $x_i\cdot w+\alpha\geq 0$. So $y_i(x_i\cdot w+\alpha)\geq 0$.
 
+For the out-of-class sample points, the label $y_i=-1$ and it is on the negative side of the decision boundary, so we have $x_i\cdot w+\alpha\leq 0$.
+So $y_i(x_i\cdot w+\alpha)\geq 0$.
 
+So above all, we have the constraints as follows:
+$$y_i(x_i\cdot w+\alpha)\geq 0, \forall i\in\{1,2,\cdots,n\}$$
 
-(b)
+(b) For any point $X_i$, suppose that the projection of $X_i$ on the hyperplane $\mathcal{H}$ is $x$, then we have
+$$x\cdot w+\alpha=0$$
+And since $x$ is the projection of $X_i$ on the hyperplane $\mathcal{H}$, so we have $(X_i-x)\perp \mathcal{H}$, which means
+$(X_i-x) \parallel w$. Suppose that $X_i-x=d w$, then we have
+\begin{align*}
+  d \dfrac{w}{\|w\|}&=X_i - x \\
+  d \dfrac{w^Tw}{\|w\|}&=w^T(X_i - x)  \text{ (multiply $w^T$ on both sides)} \\
+  d \dfrac{\|w\|^2}{\|w\|}&=w^TX_i - w^Tx = w^TX_i + \alpha \text{ ($w^Tx+\alpha=0$)} \\
+  d &= \dfrac{w^TX_i + \alpha}{\|w\|}
+\end{align*}
 
+And since $X_i$ could be in the positive side or negative side of the hyperplane $\mathcal{H}$, $d$ may be positive or negetive.
+So the distance from a point $X_i$ to the hyperplane $\mathcal{H}$ is
+$$r = |d| = \dfrac{|w^TX_i + \alpha|}{\|w\|}$$
 
+So above all, the distance from a point $X_i$ to the hyperplane $\mathcal{H}$ is
+$$r = \dfrac{|w^TX_i + \alpha|}{\|w\|}$$
 
+(c) Since the sample point $X_i$ is correctly classified, so we have $y_i(x_i\cdot w+\alpha)> 0$.\\
+But as the inequality should only relate to the normal vector $w$, so we could get that $x_i\cdot w+\alpha\neq 0$.
 
-(c)
+So above all, the inequality that relates the distance of sample point $X_i$ to the hyperplane $\mathcal{H}$ in terms of only the normal vector $w$ is
+$$x_i\cdot w+\alpha\neq 0,\ \forall i\in\{1,2,\cdots,n\}$$
 
+(d) Suppose that the margin of the maximum margin classifier is $\gamma$.\\
+Then for any support vector $X_i$, we have $\gamma = \dfrac{|w^TX_i + \alpha|}{\|w\|}$.\\
+So above all, the distance from any support vector to the decision boundary is:
+$$\gamma = \dfrac{|w^TX_i + \alpha|}{\|w\|}$$
 
+(e) The original problem for the maximum margin classifier is
+\begin{equation}
+  \begin{aligned}
+    & \underset{w,\alpha}{\text{maximize}}
+    & & \gamma \\
+    & \text{subject to}
+    & & y_i(x_i\cdot w+\alpha)\geq \gamma,\ \forall i\in\{1,2,\cdots,n\} \\
+    & & & \|w\|=1
+  \end{aligned}
+\end{equation}
 
+But $\|w\|=1$ is not a convex constraint, so we can divide both sides of the equation by $\gamma$ simultaneously.
+And let $w'=\dfrac{w}{\gamma}, \alpha'=\dfrac{\alpha}{\gamma}$.\\
+Since $\|w\|=1$, so maximize $\gamma$ is equivalent to minimize $\|w'\|=\dfrac{\|w\|}{\gamma}=\dfrac{1}{\gamma}$, which has the same 
+effect as minimzing $\|w'\|^2$.\\ 
+So the original problem is equivalent to
+\begin{equation}
+  \begin{aligned}
+    & \underset{w',\alpha'}{\text{minimize}}
+    & & \|w'\|^2 \\
+    & \text{subject to}
+    & & y_i(x_i\cdot w'+\alpha')\geq 1,\ \forall i\in\{1,2,\cdots,n\} \\
+  \end{aligned}
+\end{equation}
 
-
-
-(d)
-
-
-
-(e)
-
-
-
-
-
-
-
+And since $\|w'\|^2$ is a convex objective funcion, and the constrains are linear constrains. So it is an optimization problem with convex objective function and linear constraints that also maximize the margin.\\
+So above all, the optimization problem for the maximum margin classifier could be:
+\begin{equation}
+  \begin{aligned}
+    & \underset{w',\alpha'}{\text{minimize}}
+    & & \|w'\|^2 \\
+    & \text{subject to}
+    & & y_i(x_i\cdot w'+\alpha')\geq 1,\ \forall i\in\{1,2,\cdots,n\} \\
+  \end{aligned}
+\end{equation}
 
 \newpage 
 % ////////////////////////////////////////////////      
