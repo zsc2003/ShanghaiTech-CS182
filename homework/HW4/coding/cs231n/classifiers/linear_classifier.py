@@ -57,7 +57,10 @@ class LinearClassifier(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            # pass
+            sample_indices = np.random.choice(num_train, batch_size, replace=True)
+            X_batch = X[sample_indices]
+            y_batch = y[sample_indices]
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -72,7 +75,9 @@ class LinearClassifier(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            # pass
+
+            self.W -= learning_rate * grad
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -102,7 +107,10 @@ class LinearClassifier(object):
         ###########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        pass
+        # pass
+
+        scores = X.dot(self.W)
+        y_pred = np.argmax(scores, axis=1)
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return y_pred
@@ -122,7 +130,36 @@ class LinearClassifier(object):
         - loss as a single float
         - gradient with respect to self.W; an array of the same shape as W
         """
-        pass
+        
+        # pass
+
+        # loss
+
+        N = X_batch.shape[0]
+
+        S = X_batch.dot(self.W) # N * C
+        # S[i,j] : xi.dot(wj) X's i-th row, W's j-th column
+
+        delta = 1
+        # print("np.arrange(N) = ", np.arange(N))
+        S_correct = S[np.arange(N), y_batch].reshape(-1, 1) # N * 1
+        margin = np.maximum(0, S - S_correct + delta) # N * C
+
+        N = X_batch.shape[0]
+        loss = np.sum(margin) / N - delta
+        loss += reg * np.sum(self.W * self.W)
+        
+        # gradient
+        margin[margin > 0] = 1
+        mask = np.array(margin)
+        mask[np.arange(N), y_batch] -= np.sum(mask, axis=1)
+        dW = X_batch.T.dot(mask) / N
+        dW += 2 * reg * self.W
+
+        # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+
+        return loss, dW
+
 
 
 class LinearSVM(LinearClassifier):
