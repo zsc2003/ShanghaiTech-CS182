@@ -42,8 +42,8 @@ def svm_loss_naive(W, X, y, reg):
             if margin > 0:
                 loss += margin
 
-                dW[:, j] += X[i].T # W's j-th column += X[i]^T
-                dW[:, y[i]] -= X[i].T # W's y_i-th column -= X[i]^T
+                dW[:, j] += X[i] # W's j-th column += X[i]
+                dW[:, y[i]] -= X[i] # W's y_i-th column -= X[i]
 
     # Right now the loss is a sum over all training examples, but we want it
     # to be an average instead so we divide by num_train.
