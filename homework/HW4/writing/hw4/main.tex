@@ -203,21 +203,71 @@ What information does the PCA algorithm use to decide that one principal compone
 From an optimization point of view, why do we prefer that one? [2 pts]\par
 
 \textbf{Solution:}\\
-(a)
+(a) The sample mean is that $\mu=\dfrac{1}{6}\sum\limits_{i=1}^6 X_i=\left[\begin{array}{l}
+  1 \\
+  1
+  \end{array}\right]$
+
+After subtracting the mean from each sample, we form the centered design matrix
+$$\dot{X}=X-\mu=
+\begin{bmatrix}
+  -1 & -1 \\
+  -1 & 0 \\
+  0 & -1 \\
+  0 & 1 \\
+  1 & 0 \\
+  1 & 1 
+\end{bmatrix}
+$$
+
+(b) We can calculate that
+$$\dot{X}^{\top} \dot{X}=
+\begin{bmatrix}
+  4 & 2 \\
+  2 & 4
+\end{bmatrix}$$
+
+The characteristic polynomial of this symmetric matrix is
+$$\det(\lambda I - \dot{X}^{\top} \dot{X})=(\lambda-2)(\lambda-6)$$
+So the eigenvalues of $\dot{X}^{\top} \dot{X}$ are $\lambda_1=6, \lambda_2=2$.
+
+For $\lambda_1=6$, we have the corresponding eigenvector is that $\mathbf{v}_1=
+\dfrac{1}{\sqrt{2}}\begin{bmatrix}
+  1 \\
+  -1
+\end{bmatrix}$.
+
+And for $\lambda_2=2$, we have the corresponding eigenvector is that $\mathbf{v}_2=
+\begin{bmatrix}
+  1 \\
+  0
+\end{bmatrix}$.
+
+So above all, the principal components of this sample are 
+$\dfrac{1}{\sqrt{2}}\begin{bmatrix}
+  1 \\
+  -1
+\end{bmatrix}$ and $\begin{bmatrix}
+  1 \\
+  0
+\end{bmatrix}$.
+
+(c) 1. Since $\lambda_1=6>\lambda_2=2$, and we have known that the eigenvalues $\lambda$ is 
+equal to the variance of the data projected onto the corresponding eigenvector $\mathbf{v}$.\\
+So the variance of the data projected onto $\mathbf{v}_1$ is larger than the variance of the data projected onto $\mathbf{v}_2$.\\
+So we prefer $\mathbf{v}_1$ if we use only one principal component.\\
+
+2. The PCA algorithm use the variance of the data projected onto the corresponding eigenvector $\mathbf{v}$ to decide that one principal components is better than another.\\
+larger variance that seperate the data along the component is better.\\
+
+
+3. From an optimization point of view, we prefer $\mathbf{v}_1$ because the variance of the data projected onto $\mathbf{v}_1$ is larger than the variance of the data projected onto $\mathbf{v}_2$.
 
 
 
 
 
 
-
-(b)
-
-
-
-
-
-(c)
 
 
 
