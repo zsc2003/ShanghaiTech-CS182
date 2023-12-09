@@ -62,18 +62,19 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 
 \textbf{Solution:}\\
 (a) Since all sample points are correctly classified, so for the in-class sample points, the label $y_i=1$ and it is on the 
-positive side of the decision boundary, so we have $x_i\cdot w+\alpha\geq 0$. So $y_i(x_i\cdot w+\alpha)\geq 0$.
+positive side of the decision boundary, so we have $x_i\cdot w+\alpha> 0$.
+So $y_i(x_i\cdot w+\alpha)> 0$.
 
-For the out-of-class sample points, the label $y_i=-1$ and it is on the negative side of the decision boundary, so we have $x_i\cdot w+\alpha\leq 0$.
-So $y_i(x_i\cdot w+\alpha)\geq 0$.
+For the out-of-class sample points, the label $y_i=-1$ and it is on the negative side of the decision boundary, so we have $x_i\cdot w+\alpha< 0$.
+So $y_i(x_i\cdot w+\alpha)> 0$.
 
 So above all, we have the constraints as follows:
-$$y_i(x_i\cdot w+\alpha)\geq 0, \forall i\in\{1,2,\cdots,n\}$$
+$$y_i(x_i\cdot w+\alpha)> 0, \forall i\in\{1,2,\cdots,n\}$$
 
 (b) For any point $X_i$, suppose that the projection of $X_i$ on the hyperplane $\mathcal{H}$ is $x$, then we have
 $$x\cdot w+\alpha=0$$
 And since $x$ is the projection of $X_i$ on the hyperplane $\mathcal{H}$, so we have $(X_i-x)\perp \mathcal{H}$, which means
-$(X_i-x) \parallel w$. Suppose that $X_i-x=d w$, then we have
+$(X_i-x) \parallel w$. So we can suppose that $X_i-x=d \dfrac{w}{\|w\|}$, then we have
 \begin{align*}
   d \dfrac{w}{\|w\|}&=X_i - x \\
   d \dfrac{w^Tw}{\|w\|}&=w^T(X_i - x)  \text{ (multiply $w^T$ on both sides)} \\
@@ -81,7 +82,7 @@ $(X_i-x) \parallel w$. Suppose that $X_i-x=d w$, then we have
   d &= \dfrac{w^TX_i + \alpha}{\|w\|}
 \end{align*}
 
-And since $X_i$ could be in the positive side or negative side of the hyperplane $\mathcal{H}$, $d$ may be positive or negetive.
+And since $X_i$ could be in the positive side or negative side of the hyperplane $\mathcal{H}$, so $d$ may be positive or negetive.
 So the distance from a point $X_i$ to the hyperplane $\mathcal{H}$ is
 $$r = |d| = \dfrac{|w^TX_i + \alpha|}{\|w\|}$$
 
@@ -98,14 +99,15 @@ $$X_i\cdot w+\alpha\neq 0,\ \forall i\in\{1,2,\cdots,n\}$$
 Then for any support vector $X_i$, we have $\gamma = \dfrac{|w^TX_i + \alpha|}{\|w\|}$.\\
 So above all, the distance from any support vector to the decision boundary is:
 $$\gamma = \dfrac{|w^TX_i + \alpha|}{\|w\|}$$
+Where $X_i$ is any support vector.\\
 
 (e) The original problem for the maximum margin classifier is
 \begin{equation}
   \begin{aligned}
-    & \underset{w,\alpha}{\text{maximize}}
+    & \max_{w,\alpha}
     & & \gamma \\
     & \text{subject to}
-    & & y_i(x_i\cdot w+\alpha)\geq \gamma,\ \forall i\in\{1,2,\cdots,n\} \\
+    & & y_i(X_i\cdot w+\alpha)\geq \gamma,\ \forall i\in\{1,2,\cdots,n\} \\
     & & & \|w\|=1
   \end{aligned}
 \end{equation}
@@ -117,7 +119,7 @@ effect as minimzing $\|w'\|^2$.\\
 So the original problem is equivalent to
 \begin{equation}
   \begin{aligned}
-    & \underset{w',\alpha'}{\text{minimize}}
+    & \min_{w',\alpha'}
     & & \|w'\|^2 \\
     & \text{subject to}
     & & y_i(x_i\cdot w'+\alpha')\geq 1,\ \forall i\in\{1,2,\cdots,n\} \\
@@ -128,7 +130,7 @@ And since $\|w'\|^2$ is a convex objective funcion, and the constrains are linea
 So above all, the optimization problem for the maximum margin classifier could be:
 \begin{equation}
   \begin{aligned}
-    & \underset{w',\alpha'}{\text{minimize}}
+    & \min_{w',\alpha'}
     & & \|w'\|^2 \\
     & \text{subject to}
     & & y_i(x_i\cdot w'+\alpha')\geq 1,\ \forall i\in\{1,2,\cdots,n\} \\
@@ -140,16 +142,39 @@ So above all, the optimization problem for the maximum margin classifier could b
     \item \defpoints{15} Consider a dataset of $n$ observations $\mathbf{X}\in         \mathbb{R}^{n \times d}$, and our goal is to project the data onto a           subspace having dimensionality $p$, $p<d$. 
 	Prove that PCA based on projected variance maximization is equivalent to       PCA based on projected error (Euclidean error) minimization. \par
 \textbf{Solution:}\\
-	
+Suppose that all sampled points are centered, so the sample mean is $\mu=0$.\\
+And suppose that $\mathbf{v}$ is the direction of the projection. Where $\mathbf{v}\in \mathbb{R}^d$ and let $\|\mathbf{v}\|=1$.\\
+So for each sampled point $X_i$, the projection of $X_i$ on the direction $\mathbf{v}$ is $X_i\cdot \mathbf{v}=X_i^{\top}\mathbf{v}$.\\
+And for the PCA problem, our goal is to find the most suitable $p$ directions $\mathbf{v}$.
+We could consider them seperately, and with the method to take the most $p$ suitable directions $\mathbf{v}$.\\
+
+1. The method based on projected variance maximization:\\
+The objective function is to maximize the projected variance, which is
+$$\max_{\mathbf{v}} \dfrac{1}{n}\sum\limits_{i=1}^n (X_i^{\top}\mathbf{v})^2$$
  
 
 
+2. As for the method based on projected error minimization:\\
+The objective function is to minimize the projected error, which is
+$$\min_{\mathbf{v}} \sum\limits_{i=1}^n \|X_i-(X_i^{\top}\mathbf{v})\mathbf{v}\|^2$$
+
+From the vector's addition operation, we can get that $X_i-(X_i^{\top}\mathbf{v})\mathbf{v}$ is perpendicular to $\mathbf{v}$.\\
+So we have $(X_i-(X_i^{\top}\mathbf{v})\mathbf{v})\cdot \mathbf{v}=0$.\\
+So $$\|X_i\|^2=\|(X_i-(X_i^{\top}\mathbf{v})\mathbf{v})+((X_i^{\top}\mathbf{v})\mathbf{v})\|^2=\|X_i-(X_i^{\top}\mathbf{v})\mathbf{v}\|^2+\|(X_i^{\top}\mathbf{v})\mathbf{v}\|^2$$
+Since $\|\mathbf{v}\|=1$, so $$\|(X_i^{\top}\mathbf{v})\mathbf{v}\|^2=(X_i^{\top}\mathbf{v})^2\|\mathbf{v}\|^2=(X_i^{\top}\mathbf{v})^2$$
+So $$\|X_i-(X_i^{\top}\mathbf{v})\mathbf{v}\|^2=\|X_i\|^2-(X_i^{\top}\mathbf{v})^2$$
+So the objective function is equivalent to
+$$\min_{\mathbf{v}} \sum\limits_{i=1}^n \|X_i-(X_i^{\top}\mathbf{v})\mathbf{v}\|^2=\min_{\mathbf{v}} \sum\limits_{i=1}^n \|X_i\|^2-\sum\limits_{i=1}^n(X_i^{\top}\mathbf{v})^2$$
+Since our goal is to find the suitable $\mathbf{v}$, so the sample points $X_i$ is fixed.\\
+So $\sum\limits_{i=1}^n \|X_i\|^2$ is a constant. And $n$ is also a constant.\\
+So the objective function is equivalent to
+$$\min_{\mathbf{v}} \sum\limits_{i=1}^n \|X_i\|^2-\sum\limits_{i=1}^n(X_i^{\top}\mathbf{v})^2\Leftrightarrow \min_{\mathbf{v}} -\sum\limits_{i=1}^n(X_i^{\top}\mathbf{v})^2\Leftrightarrow \max_{\mathbf{v}}\sum\limits_{i=1}^n(X_i^{\top}\mathbf{v})^2\Leftrightarrow \max_{\mathbf{v}}\dfrac{1}{n}\sum\limits_{i=1}^n(X_i^{\top}\mathbf{v})^2 $$
 
 
-
-
-
-
+So above all, the objective function of the method based on projected error minimization is the same as the objective function of the method based on projected variance maximization.\\
+And they also have the same constrain that is $\|\mathbf{v}\|=1$.\\
+So the two method is actually the same optimization problem.\\
+So PCA based on projected variance maximization is equivalent to PCA based on projected error minimization.\\
 
 \newpage
  % ////////////////////////////////////////////////  
@@ -203,7 +228,10 @@ What information does the PCA algorithm use to decide that one principal compone
 From an optimization point of view, why do we prefer that one? [2 pts]\par
 
 \textbf{Solution:}\\
-(a) The sample mean is that $\mu=\dfrac{1}{6}\sum\limits_{i=1}^6 X_i=\left[\begin{array}{l}
+(a) 
+Original sample matrix $X\in \mathbb{R}^{n\times d}=\mathbb{R}^{6\times 2}$.\\
+
+The sample mean is that $\mu=\dfrac{1}{6}\sum\limits_{i=1}^6 X_i=\left[\begin{array}{l}
   1 \\
   1
   \end{array}\right]$
@@ -252,26 +280,34 @@ $\dfrac{1}{\sqrt{2}}\begin{bmatrix}
   0
 \end{bmatrix}$.
 
-(c) 1. Since $\lambda_1=6>\lambda_2=2$, and we have known that the eigenvalues $\lambda$ is 
-equal to the variance of the data projected onto the corresponding eigenvector $\mathbf{v}$.\\
-So the variance of the data projected onto $\mathbf{v}_1$ is larger than the variance of the data projected onto $\mathbf{v}_2$.\\
-So we prefer $\mathbf{v}_1$ if we use only one principal component.\\
+(c) 1. Since $\lambda_1=6>\lambda_2=2$, so we prefer $\mathbf{v}_1$ if we use only one principal component.\\
 
-2. The PCA algorithm use the variance of the data projected onto the corresponding eigenvector $\mathbf{v}$ to decide that one principal components is better than another.\\
-larger variance that seperate the data along the component is better.\\
-
+2. The PCA algorithm use the variance of the data projected onto the corresponding eigenvector $\mathbf{v}$ or the minimum projected error to decide that one principal components is better than another.\\
+Or we can say that the PCA algorithm use the eigenvalue of the matrix $\dot{X}^{\top} \dot{X}$ to decide that one principal components is better than another.\\
 
 3. From an optimization point of view, we prefer $\mathbf{v}_1$ because the variance of the data projected onto $\mathbf{v}_1$ is larger than the variance of the data projected onto $\mathbf{v}_2$.
+And since $\lambda$ is the eigenvalue of $\dot{X}^{\top} \dot{X}$, so 
+\begin{equation}
+\begin{aligned}
+  \dot{X}^{\top} \dot{X}\mathbf{v} &= \lambda\mathbf{v}\\
+  \mathbf{v}^{\top}\dot{X}^{\top} \dot{X}\mathbf{v} &= \mathbf{v}^{\top}\lambda\mathbf{v}\ \ &(\text{multiply} \mathbf{v}^{\top} \text{to the left on both sides})\\
+  \mathbf{v}^{\top}\dot{X}^{\top} \dot{X}\mathbf{v} &= \lambda\ \ &(\mathbf{v}^{\top}\mathbf{v}=\|\mathbf{v}\|^2=1)\\
+\end{aligned}
+\end{equation}
 
+Also, the variance of the data projected onto $\mathbf{v}$ is
+\begin{equation}
+  \begin{aligned}
+    \dot{\sigma}^2 &= \dfrac{1}{n}\sum\limits_{i=1}^n (\dot{X_i}^{\top}\mathbf{v})^2 \ \ \ \text{(the centered designed } \dot{X_i} \text{is with mean 0)}\\
+                   &= \dfrac{1}{n}\sum\limits_{i=1}^n \mathbf{v}^{\top}\dot{X_i}\dot{X_i}^{\top}\mathbf{v}\\
+                   &=  \mathbf{v}^{\top}(\dfrac{1}{n}\sum\limits_{i=1}^n\dot{X_i}\dot{X_i})^{\top}\mathbf{v}\\
+                   &= \mathbf{v}^{\top}(\dfrac{1}{n}\dot{X}^{\top}\dot{X})\mathbf{v}\ \ \ \text{(the covirance matrix of the centered designed } \dot{X} \text{is } \dfrac{1}{n}\dot{X}^{\top}\dot{X}\text{)}\\
+                   &= \dfrac{1}{n}\mathbf{v}^{\top}\dot{X}^{\top}\dot{X}\mathbf{v}
+  \end{aligned}
+\end{equation}
 
-
-
-
-
-
-
-
-
+So $\lambda=\dfrac{1}{n}\dot{\sigma}^2$.\\
+Since the sample points' number $n$ is a constant, so we can use the eigenvalue to represent the variance of the data projected onto the corresponding eigenvector.\\
 
 \newpage
  
@@ -293,6 +329,11 @@ $$
                 
 
 \textbf{Solution:}
+
+
+
+
+
 
 
 

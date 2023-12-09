@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  8 DEC 2023 10:52
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  9 DEC 2023 15:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -586,29 +586,49 @@ LaTeX Warning: No \author given.
 
 [1
 
-] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+]
+Underfull \hbox (badness 10000) in paragraph at lines 101--103
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 144--150
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--178
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 255--259
+Underfull \hbox (badness 10000) in paragraph at lines 230--233
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
+Underfull \hbox (badness 10000) in paragraph at lines 283--284
 
  []
 
-[4] [5] (./main.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 285--287
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 309--311
+
+ []
+
+[5] [6] (./main.aux) ) 
 Here is how much of TeX's memory you used:
  16942 strings out of 476179
  332580 string characters out of 5813072
- 810400 words of memory out of 5000000
+ 811400 words of memory out of 5000000
  37343 multiletter control sequences out of 15000+600000
  482174 words of font info for 85 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  100i,13n,104p,644b,265s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (5 pages).
+Output written on main.pdf (6 pages).
