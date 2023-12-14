@@ -62,14 +62,16 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 
 \textbf{Solution:}\\
 (a) Since all sample points are correctly classified, so for the in-class sample points, the label $y_i=1$ and it is on the 
-positive side of the decision boundary, so we have $x_i\cdot w+\alpha> 0$.
-So $y_i(x_i\cdot w+\alpha)> 0$.
+positive side of the decision boundary, and since $w^{top}x_i+\alpha=1$ are the points that are on the positive side margin, 
+so we have $x_i\cdot w+\alpha\geq 1$.
+So $y_i(x_i\cdot w+\alpha)\geq 1$.
 
-For the out-of-class sample points, the label $y_i=-1$ and it is on the negative side of the decision boundary, so we have $x_i\cdot w+\alpha< 0$.
-So $y_i(x_i\cdot w+\alpha)> 0$.
+For the out-of-class sample points, the label $y_i=-1$ and it is on the negative side of the decision boundary, and since $w^{top}x_i+\alpha=-1$ are the points that are on the negative side margin, 
+so we have $-(x_i\cdot w+\alpha)\geq 1$.
+So $y_i(x_i\cdot w+\alpha)\geq 1$.
 
 So above all, we have the constraints as follows:
-$$y_i(x_i\cdot w+\alpha)> 0, \forall i\in\{1,2,\cdots,n\}$$
+$$y_i(x_i\cdot w+\alpha)\geq 1, \forall i\in\{1,2,\cdots,n\}$$
 
 (b) For any point $X_i$, suppose that the projection of $X_i$ on the hyperplane $\mathcal{H}$ is $x$, then we have
 $$x\cdot w+\alpha=0$$
@@ -325,7 +327,7 @@ $$
 \end{aligned}
 $$
 (a)Now, please write expressions for $\partial j / \partial g, \partial j / \partial f, \partial j / \partial e, \partial j / \partial d, \partial j / \partial c, \partial j / \partial b$, and $\partial j / \partial a$ as we have written $\partial j / \partial h$ above. If they are needed, express the derivative $s^{\prime}(\gamma)$ in terms of $s(\gamma)$ and express the derivative $r^{\prime}(\gamma)$ as the indicator function $1(\gamma \geq 0)$. (Hint: $f$ is used in two places and a is used in three, so they will need a multivariate chain rule. It might help you to draw the network as a directed graph, but it's not required.)
-
+ 
                 
 
 \textbf{Solution:}

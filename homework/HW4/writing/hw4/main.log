@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  9 DEC 2023 15:11
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.13)  14 DEC 2023 22:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -587,37 +587,37 @@ LaTeX Warning: No \author given.
 [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 101--103
+Underfull \hbox (badness 10000) in paragraph at lines 103--105
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 144--150
+Underfull \hbox (badness 10000) in paragraph at lines 146--152
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--178
+Underfull \hbox (badness 10000) in paragraph at lines 176--180
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 230--233
+Underfull \hbox (badness 10000) in paragraph at lines 232--235
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 283--284
+Underfull \hbox (badness 10000) in paragraph at lines 285--286
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 285--287
+Underfull \hbox (badness 10000) in paragraph at lines 287--289
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 309--311
+Underfull \hbox (badness 10000) in paragraph at lines 311--313
 
  []
 
@@ -625,7 +625,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 309--311
 Here is how much of TeX's memory you used:
  16942 strings out of 476179
  332580 string characters out of 5813072
- 811400 words of memory out of 5000000
+ 812400 words of memory out of 5000000
  37343 multiletter control sequences out of 15000+600000
  482174 words of font info for 85 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
