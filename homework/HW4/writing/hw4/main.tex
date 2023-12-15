@@ -62,11 +62,11 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 
 \textbf{Solution:}\\
 (a) Since all sample points are correctly classified, so for the in-class sample points, the label $y_i=1$ and it is on the 
-positive side of the decision boundary, and since $w^{top}x_i+\alpha=1$ are the points that are on the positive side margin, 
+positive side of the decision boundary, and since $w^{\top}x_i+\alpha=1$ are the points that are on the positive side margin, 
 so we have $x_i\cdot w+\alpha\geq 1$.
 So $y_i(x_i\cdot w+\alpha)\geq 1$.
 
-For the out-of-class sample points, the label $y_i=-1$ and it is on the negative side of the decision boundary, and since $w^{top}x_i+\alpha=-1$ are the points that are on the negative side margin, 
+For the out-of-class sample points, the label $y_i=-1$ and it is on the negative side of the decision boundary, and since $w^{\top}x_i+\alpha=-1$ are the points that are on the negative side margin, 
 so we have $-(x_i\cdot w+\alpha)\geq 1$.
 So $y_i(x_i\cdot w+\alpha)\geq 1$.
 
@@ -79,29 +79,30 @@ And since $x$ is the projection of $X_i$ on the hyperplane $\mathcal{H}$, so we 
 $(X_i-x) \parallel w$. So we can suppose that $X_i-x=d \dfrac{w}{\|w\|}$, then we have
 \begin{align*}
   d \dfrac{w}{\|w\|}&=X_i - x \\
-  d \dfrac{w^Tw}{\|w\|}&=w^T(X_i - x)  \text{ (multiply $w^T$ on both sides)} \\
-  d \dfrac{\|w\|^2}{\|w\|}&=w^TX_i - w^Tx = w^TX_i + \alpha \text{ ($w^Tx+\alpha=0$)} \\
-  d &= \dfrac{w^TX_i + \alpha}{\|w\|}
+  d \dfrac{w^{\top}w}{\|w\|}&=w^{\top}(X_i - x)  \text{ (multiply $w^{\top}$ on both sides)} \\
+  d \dfrac{\|w\|^2}{\|w\|}&=w^{\top}X_i - w^{\top}x = w^{\top}X_i + \alpha \text{ ($w^{\top}x+\alpha=0$)} \\
+  d &= \dfrac{w^{\top}X_i + \alpha}{\|w\|}
 \end{align*}
 
 And since $X_i$ could be in the positive side or negative side of the hyperplane $\mathcal{H}$, so $d$ may be positive or negetive.
 So the distance from a point $X_i$ to the hyperplane $\mathcal{H}$ is
-$$r = |d| = \dfrac{|w^TX_i + \alpha|}{\|w\|}$$
+$$r = |d| = \dfrac{|w^{\top}X_i + \alpha|}{\|w\|}$$
 
 So above all, the distance from a point $X_i$ to the hyperplane $\mathcal{H}$ is
-$$r = \dfrac{|w^TX_i + \alpha|}{\|w\|}$$
+$$r = \dfrac{|w^{\top}X_i + \alpha|}{\|w\|}$$
 
-(c) Since the sample point $X_i$ is correctly classified, so we have $y_i(x_i\cdot w+\alpha)> 0$.\\
-But as the inequality should only relate to the normal vector $w$, so we could get that $x_i\cdot w+\alpha\neq 0$.
+(c) Since the sample point $X_i$ is correctly classified, so we have $y_i(x_i\cdot w+\alpha)\geq 1$.\\
+But as the inequality should only relate to the normal vector $w$, so we could get that $|x_i\cdot w+\alpha|\geq 1$.
 
 So above all, the inequality that relates the distance of sample point $X_i$ to the hyperplane $\mathcal{H}$ in terms of only the normal vector $w$ is
-$$X_i\cdot w+\alpha\neq 0,\ \forall i\in\{1,2,\cdots,n\}$$
+$$|x_i\cdot w+\alpha|\geq 1,\ \forall i\in\{1,2,\cdots,n\}$$
 
 (d) Suppose that the margin of the maximum margin classifier is $\gamma$.\\
-Then for any support vector $X_i$, we have $\gamma = \dfrac{|w^TX_i + \alpha|}{\|w\|}$.\\
+Then for any support vector $X_i$, we have $\gamma = \dfrac{|w^{\top}X_i + \alpha|}{\|w\|}$.\\
+And since for the margin, we have $|w^{\top}x+\alpha|=1$.\\
 So above all, the distance from any support vector to the decision boundary is:
-$$\gamma = \dfrac{|w^TX_i + \alpha|}{\|w\|}$$
-Where $X_i$ is any support vector.\\
+$$\gamma = \dfrac{|w^{\top}X_i + \alpha|}{\|w\|}=\dfrac{1}{\|w\|}$$
+Where $X_i$ is any of the support vector.\\
 
 (e) The original problem for the maximum margin classifier is
 \begin{equation}
@@ -109,33 +110,30 @@ Where $X_i$ is any support vector.\\
     & \max_{w,\alpha}
     & & \gamma \\
     & \text{subject to}
-    & & y_i(X_i\cdot w+\alpha)\geq \gamma,\ \forall i\in\{1,2,\cdots,n\} \\
-    & & & \|w\|=1
+    & & y_i(X_i\cdot w+\alpha)\geq 1,\ \forall i\in\{1,2,\cdots,n\} \\
   \end{aligned}
 \end{equation}
 
-But $\|w\|=1$ is not a convex constraint, so we can divide both sides of the equation by $\gamma$ simultaneously.
-And let $w'=\dfrac{w}{\gamma}, \alpha'=\dfrac{\alpha}{\gamma}$.\\
-Since $\|w\|=1$, so maximize $\gamma$ is equivalent to minimize $\|w'\|=\dfrac{\|w\|}{\gamma}=\dfrac{1}{\gamma}$, which has the same 
-effect as minimzing $\|w'\|^2$.\\ 
+And since $\gamma=\dfrac{1}{\|w\|}$, so maximize $\gamma$ is equivalent to minimize $\|w\|=\dfrac{1}{\gamma}$, which has the same 
+effect as minimzing $\|w\|^2$.\\ 
 So the original problem is equivalent to
 \begin{equation}
   \begin{aligned}
-    & \min_{w',\alpha'}
-    & & \|w'\|^2 \\
+    & \min_{w,\alpha}
+    & & \|w\|^2 \\
     & \text{subject to}
-    & & y_i(x_i\cdot w'+\alpha')\geq 1,\ \forall i\in\{1,2,\cdots,n\} \\
+    & & y_i(x_i\cdot w+\alpha)\geq 1,\ \forall i\in\{1,2,\cdots,n\} \\
   \end{aligned}
 \end{equation}
 
-And since $\|w'\|^2$ is a convex objective funcion, and the constrains are linear constrains. So it is an optimization problem with convex objective function and linear constraints that also maximize the margin.\\
+And since $\|w\|^2$ is a convex objective funcion, and the constrains are linear constrains. So it is an optimization problem with convex objective function and linear constraints that also maximize the margin.\\
 So above all, the optimization problem for the maximum margin classifier could be:
 \begin{equation}
   \begin{aligned}
-    & \min_{w',\alpha'}
-    & & \|w'\|^2 \\
+    & \min_{w,\alpha}
+    & & \|w\|^2 \\
     & \text{subject to}
-    & & y_i(x_i\cdot w'+\alpha')\geq 1,\ \forall i\in\{1,2,\cdots,n\} \\
+    & & y_i(x_i\cdot w+\alpha)\geq 1,\ \forall i\in\{1,2,\cdots,n\} \\
   \end{aligned}
 \end{equation}
 
@@ -144,14 +142,15 @@ So above all, the optimization problem for the maximum margin classifier could b
     \item \defpoints{15} Consider a dataset of $n$ observations $\mathbf{X}\in         \mathbb{R}^{n \times d}$, and our goal is to project the data onto a           subspace having dimensionality $p$, $p<d$. 
 	Prove that PCA based on projected variance maximization is equivalent to       PCA based on projected error (Euclidean error) minimization. \par
 \textbf{Solution:}\\
-Suppose that all sampled points are centered, so the sample mean is $\mu=0$.\\
+Suppose that all sampled points are centered, so the sample mean is $\mathbf{\mu}=\mathbf{0}$.\\
 And suppose that $\mathbf{v}$ is the direction of the projection. Where $\mathbf{v}\in \mathbb{R}^d$ and let $\|\mathbf{v}\|=1$.\\
 So for each sampled point $X_i$, the projection of $X_i$ on the direction $\mathbf{v}$ is $X_i\cdot \mathbf{v}=X_i^{\top}\mathbf{v}$.\\
 And for the PCA problem, our goal is to find the most suitable $p$ directions $\mathbf{v}$.
 We could consider them seperately, and with the method to take the most $p$ suitable directions $\mathbf{v}$.\\
 
 1. The method based on projected variance maximization:\\
-The objective function is to maximize the projected variance, which is
+The mean of the projection values is that $\mathbf{\mu'}=\dfrac{1}{n}\sum\limits_{i=1}^n(X_i^{\top}\mathbf{v})=\mathbf{v}^{\top}(\dfrac{1}{n}\sum\limits_{i=1}^nX_i)=\mathbf{v}^{\top}\mathbf{\mu}=\mathbf{0}$, since $\mathbf{\mu}=\mathbf{0}$.\\
+So the objective function is to maximize the projected variance, which is
 $$\max_{\mathbf{v}} \dfrac{1}{n}\sum\limits_{i=1}^n (X_i^{\top}\mathbf{v})^2$$
  
 
@@ -264,25 +263,29 @@ So the eigenvalues of $\dot{X}^{\top} \dot{X}$ are $\lambda_1=6, \lambda_2=2$.
 For $\lambda_1=6$, we have the corresponding eigenvector is that $\mathbf{v}_1=
 \dfrac{1}{\sqrt{2}}\begin{bmatrix}
   1 \\
-  -1
+  1
 \end{bmatrix}$.
 
 And for $\lambda_2=2$, we have the corresponding eigenvector is that $\mathbf{v}_2=
-\begin{bmatrix}
+\dfrac{1}{\sqrt{2}}\begin{bmatrix}
   1 \\
-  0
+  -1
 \end{bmatrix}$.
 
 So above all, the principal components of this sample are 
 $\dfrac{1}{\sqrt{2}}\begin{bmatrix}
   1 \\
-  -1
-\end{bmatrix}$ and $\begin{bmatrix}
+  1
+\end{bmatrix}$ and 
+$\dfrac{1}{\sqrt{2}}\begin{bmatrix}
   1 \\
-  0
+  -1
 \end{bmatrix}$.
 
-(c) 1. Since $\lambda_1=6>\lambda_2=2$, so we prefer $\mathbf{v}_1$ if we use only one principal component.\\
+(c) 1. Since $\lambda_1=6>\lambda_2=2$, so we prefer $\mathbf{v}_1=\dfrac{1}{\sqrt{2}}\begin{bmatrix}
+  1 \\
+  -1
+\end{bmatrix}$ if we use only one principal component.\\
 
 2. The PCA algorithm use the variance of the data projected onto the corresponding eigenvector $\mathbf{v}$ or the minimum projected error to decide that one principal components is better than another.\\
 Or we can say that the PCA algorithm use the eigenvalue of the matrix $\dot{X}^{\top} \dot{X}$ to decide that one principal components is better than another.\\
@@ -327,25 +330,33 @@ $$
 \end{aligned}
 $$
 (a)Now, please write expressions for $\partial j / \partial g, \partial j / \partial f, \partial j / \partial e, \partial j / \partial d, \partial j / \partial c, \partial j / \partial b$, and $\partial j / \partial a$ as we have written $\partial j / \partial h$ above. If they are needed, express the derivative $s^{\prime}(\gamma)$ in terms of $s(\gamma)$ and express the derivative $r^{\prime}(\gamma)$ as the indicator function $1(\gamma \geq 0)$. (Hint: $f$ is used in two places and a is used in three, so they will need a multivariate chain rule. It might help you to draw the network as a directed graph, but it's not required.)
- 
-                
 
 \textbf{Solution:}
 
+For the sigmoid function $s(\gamma)=\dfrac{1}{1+e^{-\gamma}}$, we have $s'(\gamma)=\dfrac{e^{-r}}{(1+e^{-r})^2}=s(\gamma)(1-s(\gamma))$.\\
+And for the hinge function $r(\gamma)=\max \{0, \gamma\}$, we have $r'(\gamma)=\mathbbm{1}_{\gamma \geq 0}$, if we define the derivative of the indifferential point $x=0$ to be $1$.\\
 
+So\\
+1. $\dfrac{\partial j}{\partial g}=\dfrac{\partial j}{\partial i}\dfrac{\partial i}{\partial h}\dfrac{\partial h}{\partial g}=2ic$.\\
 
+2. $\dfrac{\partial j}{\partial f}=\dfrac{\partial j}{\partial f}+\dfrac{\partial j}{\partial i}\dfrac{\partial i}{\partial h}\dfrac{\partial h}{\partial f}=1+2ic$.\\
 
+3. $\dfrac{\partial j}{\partial e}=\dfrac{\partial j}{\partial i}\dfrac{\partial i}{\partial h}\dfrac{\partial h}{\partial e}=4ic$.\\
 
+4. $\dfrac{\partial j}{\partial d}=\dfrac{\partial j}{\partial i}\dfrac{\partial i}{\partial h}\dfrac{\partial h}{\partial e}\dfrac{\partial e}{\partial d}=4ic\cdot s(d)(1-s(d))$.\\
 
+5. $\dfrac{\partial j}{\partial c}=\dfrac{\partial j}{\partial i}\dfrac{\partial i}{\partial c}=2ih$.\\
 
+6. $\dfrac{\partial j}{\partial b}=\dfrac{\partial j}{\partial i}\dfrac{\partial i}{\partial h}\dfrac{\partial h}{\partial e}\dfrac{\partial e}{\partial d}\dfrac{\partial d}{\partial b}=4iac\cdot s(d)(1-s(d))$.\\
 
-
-
-
-
-
-
-
+7. $\dfrac{\partial j}{\partial a}=
+\dfrac{\partial j}{\partial f}\dfrac{\partial f}{\partial a}+
+\dfrac{\partial j}{\partial i}\dfrac{\partial i}{\partial h}\left(
+\dfrac{\partial h}{\partial e}\dfrac{\partial e}{\partial d}\dfrac{\partial d}{\partial a}+
+\dfrac{\partial h}{\partial f}\dfrac{\partial f}{\partial a}+
+\dfrac{\partial h}{\partial g}\dfrac{\partial g}{\partial a}
+\right)
+=(1+2ic)\cdot\mathbbm{1}_{a\geq 0}+4ibc\cdot s(d)(1-s(d))+2ic$.
 
 \end{enumerate}
 
