@@ -1,0 +1,119 @@
+%!TEX program = xelatex
+\documentclass[10pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{titlesec}
+\usepackage{xcolor}
+%\usepackage[shortlabels]{enumitem}
+\usepackage{enumerate}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{arrows}
+\usepackage{subfigure}
+\usepackage{graphicx,booktabs,multirow}
+\usepackage[a4paper]{geometry}
+\usepackage{upquote}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{amsthm}
+\usepackage{bbm}
+
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+\lstset{language=Matlab}
+\lstset{breaklines}
+
+\input defs.tex
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+
+\titleformat*{\section}{\centering\LARGE\scshape}
+\renewcommand{\thesection}{\Roman{section}}
+\lstset{language=Matlab,tabsize=4,frame=shadowbox,basicstyle=\footnotesize,
+keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{50,50,50},stringstyle=\ttfamily,numbers=left,numberstyle=\tiny,
+  numberstyle={\color[RGB]{192,92,92}\tiny},backgroundcolor=\color[RGB]{245,245,244},inputpath=code}
+
+\begin{document}
+
+\date{}
+\title{Optimization and Machine Learning, Fall 2023 \\
+	Homework 5 \\
+	\small (Due Thursday, Jan 11 at 11:59pm (CST))}
+\maketitle
+\begin{enumerate}[1.]
+
+	\item \defpoints{10} [Deep Learning Model]
+	\begin{enumerate}
+		\item Consider a 2D convolution layer. Suppose the input size is 4 $\times$ 64 $\times$ 64 $\times$ (channel, width, height) and
+		we use \textbf{ten} 3 $\times$ 3 (width, height) kernels with 4 channels input and 4 channels output to convolve with it. Set stride = 1 and pad = 1. What is 
+		the output size? Let the bias for each kernel be a scalar, how many parameters do we have in this layer? \defpoints{5}
+		\item The convolution layer is followed by a max pooling layer with 2 × 2 (width, height) filter and stride
+		= 2. What is the output size of the pooling layer? How many parameters do we have in the pooling
+		layer? \defpoints{5}
+	\end{enumerate}
+	
+(a)
+
+
+
+
+
+(b)
+
+
+	
+	
+	
+	
+	
+	
+	\newpage
+
+
+	\item \defpoints{10} Use the $k$-means++ algorithm and Euclidean distance to cluster the 8 data points into $K=3$ clusters.
+	      The coordinates of the data points are:
+	      \begin{align*}
+		      x^{(1)} & = (2,8),  \ x^{(2)} = (2,5), \ x^{(3)} = (1,2), \ x^{(4)} = (5,8), \\
+		      x^{(5)} & = (7,3),  \ x^{(6)} = (6,4), \ x^{(7)} = (8,4), \ x^{(8)} = (4,7).
+	      \end{align*}
+	      Suppose that initially the first cluster centers is $x^{(1)}$.
+	      \begin{itemize}
+		      \item[(a)] Perform the $k$-means++ algorithm to initialize other centers and report the coordinates of the resulting centroids. ~\defpoints{3}
+		      \item[(b)] Calculate the loss function
+		            \begin{equation}
+			            Q(r,c) = \frac{1}{n} \sum_{i=1}^n \sum_{j=1}^K r_{ij}||x^{(i)} - c_j||^2,
+		            \end{equation}
+		            where $r_{ij} = 1$ if $x^{(i)}$ belongs to the $j$-th cluster and 0 otherwise. ~\defpoints{2}
+		      \item[(c)] How many more iterations are needed to converge? ~\defpoints{3} Calculate the loss after it converged.~\defpoints{2}
+	      \end{itemize}
+		
+(a)
+
+
+
+(b)
+
+
+
+(c)
+
+
+
+		 
+		 
+		 
+		\newpage
+
+
+	\item \defpoints{10} Name 2 deep generation networks.~\defpoints{2} Briefly describe the training procedure of a GAN model.(What's the objective function? How to update the parameters in each stage?)~\defpoints{8}\\
+
+	
+	
+
+
+
+\end{enumerate}
+\end{document}
