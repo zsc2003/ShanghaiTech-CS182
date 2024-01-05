@@ -58,22 +58,24 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 (a) Since the input image is $4\times 64\times 64$, so $W=64,H=64$.\\
 And since stride $S=1$, pad $P=1$, kernel size $F=3$,\\
 so the output size is $W_{conv}=\dfrac{W+2P-F}{S}+1=64$, $H_{conv}=\dfrac{H+2P-F}{S}+1=64$.\\
-And since we have $10$ kernels, so the output size is $10\times 64\times 64$.\\
+Since we take the \textbf{pytorch convention}, the output has $4$ channels, so the output size is $4\times 64\times 64$.\\
+Which is exactly the same as the input size.\\
+And since we have $10$ kernels, as $10$ layers, and the output size is same as the input size, so the final output size is $4\times 64\times 64$.\\
 
 For each convolution kernel, we have $4\times 3\times 3=36$ parameters.\\
-And since we have $10$ kernels, each kernel has a bias, which is $1$ parameter.\\
-So the total number of parameters is $10\times (4\times 3\times 3+1)=370$.\\
+And each kernel has a bias, which is $1$ parameter.\\
+So the total number of parameters is $10\times (4\times(3\times 3+1))=400$.\\
 
-So above all, the output size is $10\times 64\times 64$, and the total number of parameters is $370$.\\
+So above all, the output size is $4\times 64\times 64$, and the total number of parameters is $400$.\\
 
-(b) Since the output size of the convolution layer is $10\times 64\times 64$.\\
+(b) Since the output size of the convolution layer is $4\times 64\times 64$.\\
 And for the pooling layer, the filter size is $F' = 2$, stride $S'=2$,\\
 so the output size is $W_{pooling}=\dfrac{W_{conv}-F'}{S'}+1=32$, $H_{pooling}=\dfrac{H_{conv}-F'}{S'}+1=32$.\\
-So the output size is $10\times 32\times 32$.\\
+So the output size is $4\times 32\times 32$.\\
 
 And since the pooling layer is a max pooling layer, so there is no parameter in this layer.\\
 
-So above all, the output size is $10\times 32\times 32$, and the total number of parameters is $0$.\\
+So above all, the output size is $4\times 32\times 32$, and the total number of parameters is $0$.\\
 	
 	\newpage
 	
@@ -104,59 +106,90 @@ So above all, the output size is $10\times 32\times 32$, and the total number of
 (a) We can calculate the other points' Euclidean distance to $x^{(1)}$ is $D(x^{(i)})$, and the probability of selecting $x^{(i)}$ as the next center is $p(x^{(i)})$, 
 which is proportional to $D(x^{(i)})^2$.\\
 So the $D^2(x^{(i)})$ and $p(x^{(i)})$ are shown in the table below.\\ 
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 	\hline
-	point & $x^{(2)}$ & $x^{(3)}$ & $x^{(4)}$ & $x^{(5)}$ & $x^{(6)}$ & $x^{(7)}$ & $x^{(8)}$\\
+	point & $x^{(1)}$ & $x^{(2)}$ & $x^{(3)}$ & $x^{(4)}$ & $x^{(5)}$ & $x^{(6)}$ & $x^{(7)}$ & $x^{(8)}$\\
 	\hline
-	$D^2(x^{(i)})$ & $9$ & $37$ & $9$ & $50$ & $32$ & $52$ & $5$\\
+	$D^2(x^{(i)})$ & $0$ & $9$ & $37$ & $9$ & $50$ & $32$ & $52$ & $5$\\
 	\hline
-	$p(x^{(i)})$ & $0.05$ & $0.19$ & $0.05$ & $0.26$ & $0.16$ & $0.27$ & $0.03$\\
+	$p(x^{(i)})$ & $0$ & $0.05$ & $0.19$ & $0.05$ & $0.26$ & $0.16$ & $0.27$ & $0.03$\\
 	\hline
 \end{tabular}\\
-We randomly sample a point. The random number is $0.6$, and since $\sum\limits_{i=2}^5 p(x^{(i)})=0.55<0.6$,\\
-$\sum\limits_{i=2}^6 p(x^{(i)})=0.71>0.6$, so we choose $x^{(6)}$ as the second class center.
+We randomly sample a point. The random number is $0.6$, and since $\sum\limits_{i=1}^5 p(x^{(i)})=0.55<0.6$,\\
+$\sum\limits_{i=1}^6 p(x^{(i)})=0.71>0.6$, so we choose $x^{(6)}$ as the second class center.
 
 2. Then, we need to choose the third center.\\
 Suppose that for the $i$-th point $x^{(i)}$, the Euclidean distance for it to $x^{(1)}$ is $D_1(x^{(i)})$,
 the Euclidean distance for it to $x^{(6)}$ is $D_2(x^{(i)})$.\\
 So the Euclidean distance to the closest center $D(x^{(i)})=\min(D_1(x^{(i)}),D_2(x^{(i)}))$.
 So the $D_1^2(x^{(i)}),D_2^2(x^{(i)}),D^2(x^{(i)})$ and $p(x^{(i)})$ are shown in the table below.\\ 
-\begin{tabular}{|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 	\hline
-	point & $x^{(2)}$ & $x^{(3)}$ & $x^{(4)}$ & $x^{(5)}$ & $x^{(7)}$ & $x^{(8)}$\\
+	point & $x^{(1)}$ & $x^{(2)}$ & $x^{(3)}$ & $x^{(4)}$ & $x^{(5)}$ & $x^{(6)}$ & $x^{(7)}$ & $x^{(8)}$\\
 	\hline
-	$D_1^2(x^{(i)})$ & $9$ & $37$ & $9$ & $50$ & $52$ & $5$\\
+	$D_1^2(x^{(i)})$ & $0$ & $9$ & $37$ & $9$ & $50$ & $32$ & $52$ & $5$\\
 	\hline
-	$D_2^2(x^{(i)})$ & $17$ & $29$ & $17$ & $2$ & $4$ & $13$\\
+	$D_2^2(x^{(i)})$ & $32$ & $17$ & $29$ & $17$ & $2$ & $0$ & $4$ & $13$\\
 	\hline
-	$D^2(x^{(i)})$ & $9$ & $29$ & $9$ & $2$ & $4$ & $5$\\
+	$D^2(x^{(i)})$ & $0$ & $9$ & $29$ & $9$ & $2$ & $0$ & $4$ & $5$\\
 	\hline
-	$p(x^{(i)})$ & $0.16$ & $0.50$ & $0.16$ & $0.03$ & $0.07$ & $0.09$\\
+	$p(x^{(i)})$ & $0$ & $0.16$ & $0.50$ & $0.16$ & $0.03$ & $0$ & $0.07$ & $0.09$\\
 	\hline
 \end{tabular}\\
-We randomly sample a point. The random number is $0.2$, and since $p(x^{(2)})=0.16<0.2$,\\
-$p(x^{(2)})+p(x^{(3)})=0.76>0.2$, so we choose $x^{(3)}$ as the third class center.
+We randomly sample a point. The random number is $0.2$, and since $\sum\limits_{i=1}^2p(x^{(i)})=0.16<0.2$,\\
+$\sum\limits_{i=1}^3p(x^{(i)})=0.76>0.2$, so we choose $x^{(3)}$ as the third class center.
 
-So above all, the centroids of the second and third cluster is $x^{(6)}=(6,4)$ and $x^{(3)}=(1,2)$.\\
+So above all, the initialized centers are:\\
+$c_1=x^{(1)}=(2,8)$, $c_2=x^{(3)}=(1,2)$, $c_3=x^{(6)}=(6,4)$.\\
  
-(b)
+(b) The center after initialization is:\\
+$c_1=x^{(1)}=(2,8)$, $c_2=x^{(3)}=(1,2)$, $c_3=x^{(6)}=(6,4)$.\\
 
+So the loss is
+$$Q(r,c)=\dfrac{1}{8}\sum\limits_{i=1}^8\sum\limits_{j=1}^3r_{ij}||x^{(i)}-c_j||^2=\dfrac{(0+9+9+5)+(0)+(2+0+4)}{8}=\dfrac{29}{8}$$
 
+So above all, the loss is $Q(r,c)=\dfrac{29}{8}$.\\
 
-(c)
+(c) For the $1$-st iteration, we have:\\
+$c_1 = \dfrac{1}{4}(x^{(1)}+x^{(2)}+x^{(4)}+x^{(8)})=(\dfrac{13}{4},7)$.\\
+$c_2 = x^{(3)}=(1,2)$.\\
+$c_3 = \dfrac{1}{3}(x^{(5)}+x^{(6)}+x^{(7)})=(7,\dfrac{11}{3})$.\\
 
+Then we calculate the Euclidean distance for each point to each center:\\
+i.e. $D_1^2(x^{(i)})=||x^{(i)}-c_1||^2$, $D_2^2(x^{(i)})=||x^{(i)}-c_2||^2$, $D_3^2(x^{(i)})=||x^{(i)}-c_3||^2$.\\
+The row $c_j$ means that the of the corresponding point is to the center $c_j$.\\ 
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+	\hline
+	point & $x^{(1)}$ & $x^{(2)}$ & $x^{(3)}$ & $x^{(4)}$ & $x^{(5)}$ & $x^{(6)}$ & $x^{(7)}$ & $x^{(8)}$\\
+	\hline
+	\text{center} $c_j$ & $c_1$ & $c_1$ & $c_2$ & $c_1$ & $c_3$ & $c_3$ & $c_3$ & $c_1$\\
+	\hline
+\end{tabular}\\
 
+And we can see that the center $c_j$ for each point is the same as the previous iteration.\\
+So it converged. i.e. it only needs $1$ iteration to converge.\\
 
+And the loss after it converged is:
+$$Q(r,c)=\dfrac{1}{8}\sum\limits_{i=1}^8\sum\limits_{j=1}^3r_{ij}||x^{(i)}-c_j||^2=\dfrac{(\dfrac{41}{16}+\dfrac{89}{16}+\dfrac{65}{16}+\dfrac{9}{16})+0+(\dfrac{40}{9}+\dfrac{10}{9}+\dfrac{10}{9})}{8}=\dfrac{233}{96}$$
 		 
-		 
+So above all, $1$ iteration is needed to converge, and the loss after it converged is $Q(r,c)=\dfrac{233}{96}$.\\		 
 		 
 		\newpage
 
 
 	\item \defpoints{10} Name 2 deep generation networks.~\defpoints{2} Briefly describe the training procedure of a GAN model.(What's the objective function? How to update the parameters in each stage?)~\defpoints{8}\\
+(a) $2$ generation networks: VAE, GAN.\\
 
+(b) The training procedure of a GAN model:\\
+The GAN model has a minimax objective funcion:
+$$\min_{\theta_g}\max_{\theta_d}\left[\mathbb{E}_{x\sim p_{data}}\log D_{\theta_d}(x)+\mathbb{E}_{z\sim p(z)}\log (1-D_{\theta_d}(G_{\theta_{g}}(z)))\right]$$
 	
-	
+To update discriminator, it wants to discriminate
+
+$$\max_{\theta_d}\left[\mathbb{E}_{x\sim p_{data}}\log D_{\theta_d}(x)+\mathbb{E}_{z\sim p(z)}\log (1-D_{\theta_d}(G_{\theta_{g}}(z)))\right]$$
+
+
+$$\min_{\theta_g}\mathbb{E}_{z\sim p(z)}\log (1-D_{\theta_d}(G_{\theta_{g}}(z)))$$
 
 
 
