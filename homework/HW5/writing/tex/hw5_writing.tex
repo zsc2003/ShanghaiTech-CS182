@@ -47,9 +47,8 @@ keywordstyle=\color{blue!90}\bfseries,breaklines=true,commentstyle=\color[RGB]{5
 
 	\item \defpoints{10} [Deep Learning Model]
 	\begin{enumerate}
-		\item Consider a 2D convolution layer. Suppose the input size is 4 $\times$ 64 $\times$ 64 $\times$ (channel, width, height) and
-		we use \textbf{ten} 3 $\times$ 3 (width, height) kernels with 4 channels input and 4 channels output to convolve with it. Set stride = 1 and pad = 1. What is 
-		the output size? Let the bias for each kernel be a scalar, how many parameters do we have in this layer? \defpoints{5}
+		\item Consider a sequential 2D convolution block consist of 10 layers. Suppose the input size is 4 $\times$ 64 $\times$ 64 $\times$ (channel, width, height) and
+		we use 3 $\times$ 3 (width, height) Conv2D with 4 channels input and 4 channels output to convolve with it. Set stride = 1 and pad = 1. What is the output size? Let the bias for each kernel be a scalar, how many parameters do we have in the ? \defpoints{5}
 		\item The convolution layer is followed by a max pooling layer with 2 × 2 (width, height) filter and stride
 		= 2. What is the output size of the pooling layer? How many parameters do we have in the pooling
 		layer? \defpoints{5}
@@ -62,7 +61,7 @@ Since we take the \textbf{pytorch convention}, the output has $4$ channels, so t
 Which is exactly the same as the input size.\\
 And since we have $10$ kernels, as $10$ layers, and the output size is same as the input size, so the final output size is $4\times 64\times 64$.\\
 
-For each convolution kernel, we have $4\times 3\times 3=36$ parameters.\\
+For each convolution layer, the kernels have total $4\times 3\times 3=36$ parameters.\\
 And each kernel has a bias, which is $1$ parameter.\\
 So the total number of parameters is $10\times (4\times(3\times 3+1))=400$.\\
 
@@ -144,6 +143,7 @@ $c_1=x^{(1)}=(2,8)$, $c_2=x^{(3)}=(1,2)$, $c_3=x^{(6)}=(6,4)$.\\
  
 (b) The center after initialization is:\\
 $c_1=x^{(1)}=(2,8)$, $c_2=x^{(3)}=(1,2)$, $c_3=x^{(6)}=(6,4)$.\\
+And $x^{(1)},x^{(2)},x^{(4)},x^{(8)}$ belong to $c_1$, $x^{(3)}$ belong to $c_2$, $x^{(5)},x^{(6)},x^{(7)}$ belong to $c_3$.
 
 So the loss is
 $$Q(r,c)=\dfrac{1}{8}\sum\limits_{i=1}^8\sum\limits_{j=1}^3r_{ij}||x^{(i)}-c_j||^2=\dfrac{(0+9+9+5)+(0)+(2+0+4)}{8}=\dfrac{29}{8}$$
@@ -158,6 +158,7 @@ $c_3 = \dfrac{1}{3}(x^{(5)}+x^{(6)}+x^{(7)})=(7,\dfrac{11}{3})$.\\
 Then we calculate the Euclidean distance for each point to each center:\\
 i.e. $D_1^2(x^{(i)})=||x^{(i)}-c_1||^2$, $D_2^2(x^{(i)})=||x^{(i)}-c_2||^2$, $D_3^2(x^{(i)})=||x^{(i)}-c_3||^2$.\\
 The row $c_j$ means that the of the corresponding point is to the center $c_j$.\\ 
+i.e. for the point $x^{(i)}$, the distance to the center $c_j$ has the smallest Euclidean distance among all centers.\\ 
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 	\hline
 	point & $x^{(1)}$ & $x^{(2)}$ & $x^{(3)}$ & $x^{(4)}$ & $x^{(5)}$ & $x^{(6)}$ & $x^{(7)}$ & $x^{(8)}$\\
@@ -181,14 +182,20 @@ So above all, $1$ iteration is needed to converge, and the loss after it converg
 (a) $2$ generation networks: VAE, GAN.\\
 
 (b) The training procedure of a GAN model:\\
-The GAN model has a minimax objective funcion:
+The GAN model has two parts: generator $G$ and discriminator $D$.\\
+The generator $G$ is a neural network, which takes a random noise $z$ as input, and outputs a fake image $G(z)$.\\
+The discriminator $D$ is also a neural network, which takes a image $x$ as input, and outputs a probability $D(x)$, which means the probability that $x$ is a real image.\\
+Then we can train the GAN model by training the generator $G$ and discriminator $D$ alternately.\\
+The generator wants to generate a fake image $G(z)$, which can fool the discriminator $D$.\\
+The discriminator wants to discriminate the real image $x$ and the fake image $G(z)$.\\
+
+To balance the generator and discriminator, the GAN model has a minimax objective funcion:
 $$\min_{\theta_g}\max_{\theta_d}\left[\mathbb{E}_{x\sim p_{data}}\log D_{\theta_d}(x)+\mathbb{E}_{z\sim p(z)}\log (1-D_{\theta_d}(G_{\theta_{g}}(z)))\right]$$
 	
-To update discriminator, it wants to discriminate
-
+To update discriminator, it wants to discriminate to use gradient ascent to 
 $$\max_{\theta_d}\left[\mathbb{E}_{x\sim p_{data}}\log D_{\theta_d}(x)+\mathbb{E}_{z\sim p(z)}\log (1-D_{\theta_d}(G_{\theta_{g}}(z)))\right]$$
 
-
+To update generator, it wants to generator to use gradient descent to 
 $$\min_{\theta_g}\mathbb{E}_{z\sim p(z)}\log (1-D_{\theta_d}(G_{\theta_{g}}(z)))$$
 
 
