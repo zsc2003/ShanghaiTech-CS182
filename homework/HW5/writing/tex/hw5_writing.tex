@@ -61,11 +61,11 @@ Since we take the \textbf{pytorch convention}, the output has $4$ channels, so t
 Which is exactly the same as the input size.\\
 And since we have $10$ kernels, as $10$ layers, and the output size is same as the input size, so the final output size is $4\times 64\times 64$.\\
 
-For each convolution layer, the kernels have total $4\times 3\times 3=36$ parameters.\\
-And each kernel has a bias, which is $1$ parameter.\\
-So the total number of parameters is $10\times (4\times(3\times 3+1))=400$.\\
+For each convolution layer, the kernels have total $4\times 4\times 3\times 3=144$ parameters.\\
+And each kernel has a bias, which is $4\times 1$ parameter.\\
+So the total number of parameters is $10\times (4\times(4\times 3\times 3+1))=1480$.\\
 
-So above all, the output size is $4\times 64\times 64$, and the total number of parameters is $400$.\\
+So above all, the output size is $4\times 64\times 64$, and the total number of parameters is $1480$.\\
 
 (b) Since the output size of the convolution layer is $4\times 64\times 64$.\\
 And for the pooling layer, the filter size is $F' = 2$, stride $S'=2$,\\
