@@ -170,10 +170,15 @@ i.e. for the point $x^{(i)}$, the distance to the center $c_j$ has the smallest 
 And we can see that the center $c_j$ for each point is the same as the previous iteration.\\
 So it converged. i.e. it only needs $1$ iteration to converge.\\
 
-And the loss after it converged is:
-$$Q(r,c)=\dfrac{1}{8}\sum\limits_{i=1}^8\sum\limits_{j=1}^3r_{ij}||x^{(i)}-c_j||^2=\dfrac{(\dfrac{41}{16}+\dfrac{89}{16}+\dfrac{65}{16}+\dfrac{9}{16})+0+(\dfrac{40}{9}+\dfrac{10}{9}+\dfrac{10}{9})}{8}=\dfrac{233}{96}$$
+And we can calculate the Euclidean distance for each point to their center:\\
+$D^2(x^{(1)})=\dfrac{41}{16},D^2(x^{(2)})=\dfrac{89}{16},D^2(x^{(3)})=0,D^2(x^{(4)})=\dfrac{65}{16},D^2(x^{(5)})=\dfrac{4}{9},D^2(x^{(6)})=\dfrac{10}{9}$\\
+
+$D^2(x^{(7)})=\dfrac{10}{9},D^2(x^{(8)})=\dfrac{9}{16}$.\\
+
+So the loss after it converged is:
+$$Q(r,c)=\dfrac{1}{8}\sum\limits_{i=1}^8\sum\limits_{j=1}^3r_{ij}||x^{(i)}-c_j||^2=\dfrac{(\dfrac{41}{16}+\dfrac{89}{16}+\dfrac{65}{16}+\dfrac{9}{16})+0+(\dfrac{4}{9}+\dfrac{10}{9}+\dfrac{10}{9})}{8}=\dfrac{185}{96}$$
 		 
-So above all, $1$ iteration is needed to converge, and the loss after it converged is $Q(r,c)=\dfrac{233}{96}$.\\		 
+So above all, $1$ iteration is needed to converge, and the loss after it converged is $Q(r,c)=\dfrac{185}{96}$.\\		 
 		 
 		\newpage
 
